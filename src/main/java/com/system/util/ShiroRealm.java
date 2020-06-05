@@ -57,8 +57,8 @@ public class ShiroRealm extends AuthorizingRealm {
 	public static void main(String[] args) {
 		String algorithmName = "MD5";
 		Object source = "123456";
-		Object salt = ByteSource.Util.bytes(String.valueOf(100001));
-		Integer hashIterations = 1;
+		Object salt = ByteSource.Util.bytes(String.valueOf(10003));
+		Integer hashIterations = 1024;
 		SimpleHash simpleHash = new SimpleHash(algorithmName, source, salt, hashIterations);
 		System.out.println(simpleHash);
 	}
@@ -105,6 +105,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
 		//查询用户信息
 		User upUser = userService.selectByPrimaryKey(Integer.valueOf(user.getUsername()));
+		System.out.println(user.getUsername());
 		//账号不存在
 		if(upUser == null) {
 			throw new UnknownAccountException("用户名不正确");
@@ -121,7 +122,7 @@ public class ShiroRealm extends AuthorizingRealm {
 			throw new LockedAccountException("用户已被禁用,请联系管理员");
 		}*/
 		// principal 认证实体信息 可以是username 也可以是数据表对应的实体类
-		Object principal = upUser.getUname();
+		Object principal = upUser.getUid();
 		// credentials 密码
 
 		Object credentials = upUser.getPwd();

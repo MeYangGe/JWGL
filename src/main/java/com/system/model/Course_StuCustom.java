@@ -8,8 +8,6 @@ public class Course_StuCustom implements Serializable {
 
     private Integer studentid;
 
-    private Integer mark;
-
     public Integer getCourseid() {
         return courseid;
     }
@@ -26,11 +24,4 @@ public class Course_StuCustom implements Serializable {
         this.studentid = studentid;
     }
 
-    public Integer getMark() {
-        return mark;
-    }
-
-    public void setMark(Integer mark) {
-        this.mark = mark;
-    }
 }

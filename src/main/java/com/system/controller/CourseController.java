@@ -4,6 +4,8 @@ package com.system.controller;
 import com.system.service.CourseService;
 import com.system.util.ResultVM;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +31,11 @@ public class CourseController {
         //返回定制实体类结果
         return ResultVM.ok(pageInfo);
     }
-    //分页以及带条件的查询学生ID
-    @GetMapping("Selectedcourses/{sid}")
-    public ResultVM getSelectedcourses(@PathVariable("sid") Integer sid, @RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
+    //分页以及带条件的查询学生已选课程ID
+    @GetMapping("Selectedcourses")
+    public ResultVM getSelectedcourses(@RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
+        Subject subject = SecurityUtils.getSubject();
+        Integer sid = (Integer) subject.getPrincipal();
         //封装PageInfo分页工具类
         PageInfo pageInfo = new PageInfo(courseService.selectCourseBySid(sid,pageNum,pageSize));
         //返回定制实体类结果
