@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.system.model.Teacher">
+    <id column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="edu" jdbcType="VARCHAR" property="edu" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="hiredate" jdbcType="DATE" property="hireDate" />
+    <association property="college" javaType="com.system.model.College" autoMapping="true"></association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    tid, name, sex, birthday, edu, title, hiredate, cid
+  </sql>
+
+</mapper>
