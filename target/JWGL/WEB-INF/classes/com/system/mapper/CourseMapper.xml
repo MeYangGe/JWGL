@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.CourseMapper">
+    <resultMap id="BaseResultMap" type="com.system.model.Course">
+        <result column="courseid" jdbcType="INTEGER" property="cid"/>
+        <result column="coursename" jdbcType="VARCHAR" property="cname"/>
+        <result column="schooltime" jdbcType="DATE" property="schoolTime"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="week" jdbcType="INTEGER" property="week"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="score" jdbcType="DOUBLE" property="score"/>
+        <association property="teacher" javaType="com.system.model.Teacher" autoMapping="true">
+        </association>
+        <association property="college" javaType="com.system.model.College" autoMapping="true">
+        </association>
+    </resultMap>
+<!--模糊查询带分页的查询所有课程-->
+    <select id="selectAll" resultMap="BaseResultMap">
+
+        select c.cid as courseid ,c.cname as coursename,c.tid as tid,
+        c.schooltime ,c.address ,c.week ,
+        c.type,c.score,ce.collegeid,ce.cname from course c LEFT JOIN teacher
+        t on c.tid=t.tid LEFT JOIN college ce on c.collegeid = ce.collegeid
+    <where>
+        <if test="key!=null and key!=''">
+          c.cname like '%${key}%'
+        </if>
+    </where>
+</select>
+
+
+<!--查询学生已选课程-->
+<select id="selectCourseBySid" resultMap="BaseResultMap">
+
+    select c.cid as courseid ,c.cname as coursename,c.tid as tid,
+        c.schooltime ,c.address ,c.week,
+        c.type,c.score from course c LEFT JOIN teacher
+        t on c.tid=t.tid LEFT JOIN course_stu cs on c.cid = cs.cid
+         where cs.sid =#{sid,jdbcType=INTEGER}
+
+</select>
+
+
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.system.model.User" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <association property="role" javaType="com.system.model.Role"  autoMapping="true"></association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, uname, pwd, rid
+  </sql>
+
+
+  <!--根据ID查找用户-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <!--根据账号密码查找学生-->
+  <select id="selectBySelective" resultType="com.system.model.User">
+    select
+        <include refid="Base_Column_List" />
+    from user
+     where uname = #{uname,jdbcType=VARCHAR} and pwd=#{pwd,jdbcType=VARCHAR}
+  </select>
+
+<!--根据name查找用户-->
+  <select id="selectByUname" resultType="com.system.model.User">
+  select
+        <include refid="Base_Column_List" />
+    from user
+     where uname = #{uname,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据用户名查找用户权限-->
+  <select id="getPermissions" resultType="java.lang.String">
+select
+	r.rolename
+from
+	user u
+	left join role r on u.rid = r.rid
+where
+	u.uname = #{uname,jdbcType=VARCHAR}
+</select>
+
+
+
+
+</mapper>
