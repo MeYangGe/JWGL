@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapper.Course_StuMapper">
+<resultMap id="BaseResultMap" type="com.system.model.Course_Stu">
+<id column="csi" property="csi"></id>
+<association property="course" javaType="com.system.model.Course" autoMapping="true"></association>
+<association property="student" javaType="com.system.model.Student" autoMapping="true"></association>
+</resultMap>
+
+    <select id="selectByscid" resultMap="BaseResultMap">
+        SELECT cid,sid from course_stu where sid=#{course_stu.student.sid,jdbcType=INTEGER}
+        and cid=#{course_stu.course.cid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" >
+insert into course_stu(cid,sid,achievement,status) values (#{course_stu.course.cid,jdbcType=INTEGER},
+#{course_stu.student.sid,jdbcType=INTEGER},null,0)
+
+</insert>
+
+<delete id="upadte">
+update course_stu set status=2 where cid=#{course_stu.course.cid,jdbcType=INTEGER} and
+ sid=#{course_stu.student.sid,jdbcType=INTEGER}
+
+</delete>
+
+
+</mapper>

@@ -1,10 +1,13 @@
 package com.system.controller;
 
 
+import com.system.model.User;
 import com.system.service.CourseService;
 import com.system.util.ResultVM;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,26 +23,27 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class CourseController {
-    @Autowired
-    CourseService courseService;
+    //登陆操作
+    @GetMapping("/login")
+    public ResultVM login(User user){
+        System.out.println(user.toString());
+        Subject currentUser = SecurityUtils.getSubject();
+        //判断账号或密码是否为空
+        if(null==user.getPwd()||null==user.getUid()){
+            return ResultVM.error("账号或密码为空");
+        }
 
-    //分页以及带条件的查询所有课程
-    @GetMapping("/courses")
-    public ResultVM getAll(String key, @RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
-        //封装PageInfo分页工具类
-        PageInfo pageInfo = new PageInfo(courseService.selectAll(key,pageNum,pageSize));
-        //返回定制实体类结果
-        return ResultVM.ok(pageInfo);
+        if (!currentUser.isAuthenticated()) {
+            UsernamePasswordToken token = new UsernamePasswordToken(String.valueOf(user.getUid()), user.getPwd());
+            token.setRememberMe(true);
+            try {
+                currentUser.login(token);
+            }
+            catch (AuthenticationException ae) {
+                //unexpected condition?  error?
+                return ResultVM.error(ae.getMessage());
+            }
+        }
+        return ResultVM.ok("身份验证成功");
     }
-    //分页以及带条件的查询学生已选课程ID
-    @GetMapping("Selectedcourses")
-    public ResultVM getSelectedcourses(@RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
-        Subject subject = SecurityUtils.getSubject();
-        Integer sid = (Integer) subject.getPrincipal();
-        //封装PageInfo分页工具类
-        PageInfo pageInfo = new PageInfo(courseService.selectCourseBySid(sid,pageNum,pageSize));
-        //返回定制实体类结果
-        return ResultVM.ok(pageInfo);
-    }
-
 }

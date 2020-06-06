@@ -3,7 +3,6 @@ package com.system.service;
 import com.system.model.Student;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface StudentService {
     public int deleteByPrimaryKey(Integer sid);
 

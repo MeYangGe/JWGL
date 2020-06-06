@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getPermissions(String uname) {
-        return userMapper.getPermissions(uname);
+    public String getPermissions(Integer uid) {
+        return userMapper.getPermissions(uid);
     }
 
     @Override

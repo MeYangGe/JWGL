@@ -12,5 +12,5 @@ public interface UserMapper {
     User selectByUname(String uname);
 
 /* 根据用户名查找用户权限*/
-    String getPermissions(String uname);
+    String getPermissions(Integer sid);
 }

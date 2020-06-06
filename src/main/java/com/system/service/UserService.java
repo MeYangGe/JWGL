@@ -3,7 +3,6 @@ package com.system.service;
 import com.system.model.User;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface UserService {
    public int deleteByPrimaryKey(Integer uid);
 
@@ -21,5 +20,5 @@ public interface UserService {
 
     public User selectByUname(String uname);
 
-    public String getPermissions(String uname);
+    public String getPermissions(Integer uid);
 }

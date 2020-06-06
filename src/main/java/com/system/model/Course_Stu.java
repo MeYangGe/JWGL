@@ -6,12 +6,16 @@ import java.util.List;
 /**
  * Created by MeYanGe on 2020/6/5.
  */
-public class Course_Stu extends Course_StuCustom implements Serializable {
+public class Course_Stu implements Serializable {
+    private Integer csi;
+
+
+
     //新增Student 对象字段
     private Student student;
 
     //扩展课程信息对象
-    private List<Course> courses;
+    private Course course;
 
     //得分
     private Double score;
@@ -27,12 +31,12 @@ public class Course_Stu extends Course_StuCustom implements Serializable {
         this.student = student;
     }
 
-    public List<Course> getCourses() {
-        return courses;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Double getScore() {
@@ -49,5 +53,12 @@ public class Course_Stu extends Course_StuCustom implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+    public Integer getCsi() {
+        return csi;
+    }
+
+    public void setCsi(Integer csi) {
+        this.csi = csi;
     }
 }
