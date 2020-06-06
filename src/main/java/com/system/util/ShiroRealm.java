@@ -61,9 +61,6 @@ public class ShiroRealm extends AuthorizingRealm {
 		}
 		//密码MD5加密
 		//账号禁用
-		if("0".equals(user.getStatus())){
-			throw new LockedAccountException("用户已被禁用,请联系管理员");
-		}*/
 		// principal 认证实体信息 可以是username 也可以是数据表对应的实体类
 		Object principal = upUser.getUid();
 		// credentials 密码
