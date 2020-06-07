@@ -7,18 +7,17 @@ import java.util.List;
  * Created by MeYanGe on 2020/6/5.
  */
 public class Course_Stu implements Serializable {
+    //主键
     private Integer csi;
 
-
-
-    //新增Student 对象字段
+    //Student 对象字段
     private Student student;
 
-    //扩展课程信息对象
+    //课程信息对象
     private Course course;
 
     //得分
-    private Double score;
+    private Double achievement;
 
     //课程状态
     private Integer state ;
@@ -39,12 +38,12 @@ public class Course_Stu implements Serializable {
         this.course = course;
     }
 
-    public Double getScore() {
-        return score;
+    public Double getAchievement() {
+        return achievement;
     }
 
-    public void setScore(Double score) {
-        this.score = score;
+    public void setAchievement(Double achievement) {
+        this.achievement = achievement;
     }
 
     public Integer getState() {

@@ -44,6 +44,13 @@ public class CourseController {
                 return ResultVM.error(ae.getMessage());
             }
         }
-        return ResultVM.ok("身份验证成功");
+        if (currentUser.hasRole("admin")) {
+            return ResultVM.ok("");
+        } else if (currentUser.hasRole("teacher")) {
+            return ResultVM.ok("身份验证成功拥有权限：teacher");
+        } else if (currentUser.hasRole("student")) {
+            return ResultVM.ok("身份验证成功拥有权限：student");
+        }
+        return ResultVM.ok("身份验证成功之没得权限");
     }
 }

@@ -3,6 +3,10 @@ package com.system.service.impl;
 import com.system.model.User;
 import com.system.mapper.UserMapper;
 import com.system.service.UserService;
+import com.system.util.MD5;
+import com.system.util.ResultVM;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +14,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
-
 
     @Override
     public User selectByPrimaryKey(Integer uid) {
@@ -48,12 +51,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(User record) {
-        return 0;
-    }
+    public ResultVM updateByPrimaryKeySelective(String oldpwd, String newpwd) {
+        Subject subject = SecurityUtils.getSubject();
+        User user = selectByPrimaryKey(Integer.valueOf((Integer) subject.getPrincipal()));
+        String md5 = MD5.getMD5(oldpwd);
+        if(md5.equals(user.getPwd())){
+            user.setPwd(MD5.getMD5(newpwd));
+            userMapper.updateByPrimaryKeySelective(user);
+            return  ResultVM.ok("修改成功");
+        }else{
+            return ResultVM.error("旧密码不正确");
+        }
 
+    }
     @Override
     public int updateByPrimaryKey(User record) {
         return 0;
     }
+
 }

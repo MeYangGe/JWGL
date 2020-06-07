@@ -8,6 +8,7 @@ import com.system.service.CourseService;
 import com.system.service.Course_StuService;
 import com.system.service.StudentService;
 import com.system.service.UserService;
+import com.system.util.MD5;
 import com.system.util.ResultVM;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -49,17 +50,15 @@ public class StudentController {
     //学生选课
     @GetMapping("stuSelectedCourse/{cid}")
     public ResultVM stuSelectedCourse(@PathVariable("cid") Integer cid){
-        String s = course_stuService.selectByscid(cid);
         //返回定制实体类结果
-        return ResultVM.ok(s);
+        return course_stuService.selectByscid(cid);
 
     }
 
     //学生退课
     @GetMapping("outCourse/{cid}")
     public ResultVM outCourse(@PathVariable("cid") Integer cid){
-        String upadte = course_stuService.upadte(cid);
-        return ResultVM.ok(upadte);
+        return course_stuService.upadte(cid);
     }
     //分页以及带条件的查询所有课程
     @GetMapping("/courses")
@@ -72,5 +71,15 @@ public class StudentController {
     public ResultVM getSelectedcourses(@RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
         //返回定制实体类结果
         return ResultVM.ok(courseService.selectCourseBySid(pageNum,pageSize));
+    }
+    @GetMapping("Repairedcourses")
+    public ResultVM getRepairedcourses(@RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
+        //返回定制实体类结果
+        return course_stuService.selectCourseBySidAndStatus(pageNum,pageSize);
+    }
+    //重置密码
+    @GetMapping("Resetpassword")
+    public ResultVM resetPassword(String oldpwd,String newpwd){
+        return userService.updateByPrimaryKeySelective(oldpwd,newpwd);
     }
 }

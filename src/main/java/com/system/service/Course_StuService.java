@@ -1,6 +1,8 @@
 package com.system.service;
 
+import com.github.pagehelper.PageInfo;
 import com.system.model.Course_Stu;
+import com.system.util.ResultVM;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,9 @@ import java.util.List;
 public interface Course_StuService {
     int insert(Course_Stu course_stu);
 
-    String upadte(Integer cid);
+    ResultVM upadte(Integer cid);
 
-    String selectByscid(Integer cid);
+    ResultVM selectByscid(Integer cid);
+
+    ResultVM selectCourseBySidAndStatus(int pageNum, int pageSize);
 }

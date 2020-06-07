@@ -1,6 +1,7 @@
 package com.system.service;
 
 import com.system.model.User;
+import com.system.util.ResultVM;
 import org.springframework.stereotype.Service;
 
 public interface UserService {
@@ -12,8 +13,6 @@ public interface UserService {
 
     public User selectByPrimaryKey(Integer uid);
 
-    public int updateByPrimaryKeySelective(User record);
-
     public int updateByPrimaryKey(User record);
 
     public User selectBySelective(User user);
@@ -21,4 +20,6 @@ public interface UserService {
     public User selectByUname(String uname);
 
     public String getPermissions(Integer uid);
+
+    public ResultVM updateByPrimaryKeySelective(String oldpwd, String newpwd);
 }

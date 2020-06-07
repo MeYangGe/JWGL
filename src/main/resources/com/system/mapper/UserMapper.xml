@@ -45,7 +45,9 @@ from
 where
 	u.uid = #{uid,jdbcType=VARCHAR}
 </select>
-
+<update id="updateByPrimaryKeySelective">
+update user set pwd=#{user.pwd,jdbcType=VARCHAR} where uid=#{user.uid,jdbcType=INTEGER}
+</update>
 
 
 

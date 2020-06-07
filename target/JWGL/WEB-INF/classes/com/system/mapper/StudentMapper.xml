@@ -12,7 +12,7 @@
 </association>
   </resultMap>
   <sql id="Base_Column_List">
-    sid, name, sex, birthday, enrollment, cid
+    sid, name, sex, birthday, enrollment, collegeid
   </sql>
 
 

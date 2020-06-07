@@ -1,5 +1,7 @@
 package com.system.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.system.mapper.Course_StuMapper;
 import com.system.model.Course;
 import com.system.model.Course_Stu;
@@ -30,7 +32,7 @@ public class Course_StuServiceImpl implements Course_StuService {
     }
     
     @Override
-    public String selectByscid(Integer cid) {
+    public ResultVM selectByscid(Integer cid) {
         Subject subject = SecurityUtils.getSubject();
         Integer sid = (Integer) subject.getPrincipal();
         Course_Stu course_stu = new Course_Stu();
@@ -44,14 +46,14 @@ public class Course_StuServiceImpl implements Course_StuService {
         List<Course_Stu> course_stuCustoms = selectedcourseMapper.selectByscid(course_stu);
         if(course_stuCustoms.size()>0){
             //已经选过  返回错误并提示
-            return "你已经选过该课程了";
+            return ResultVM.error("你已经选过该课程了");
         }else{
             insert(course_stu);
+            return ResultVM.ok("选课成功");
         }
-        return "选课成功";
     }
     @Override
-    public String upadte(Integer cid){
+    public ResultVM upadte(Integer cid){
         Subject subject = SecurityUtils.getSubject();
         Integer sid = (Integer) subject.getPrincipal();
         Course_Stu course_stu = new Course_Stu();
@@ -63,10 +65,22 @@ public class Course_StuServiceImpl implements Course_StuService {
         course_stu.setStudent(student);
         int upadte =selectedcourseMapper.upadte(course_stu);
         if(upadte>0){
-            //已经选过  返回错误并提示
-            return "退课成功";
+            return ResultVM.ok("退课成功");
         }else{
-            return "选课失败";
+            //未查到  返回错误并提示
+            return ResultVM.error("选课失败");
         }
+    }
+   @Override
+   public ResultVM selectCourseBySidAndStatus(int pageNum, int pageSize){
+       PageHelper.startPage(pageNum,pageSize);
+       Subject subject = SecurityUtils.getSubject();
+       Integer sid = (Integer) subject.getPrincipal();
+       Course_Stu course_stu = new Course_Stu();
+       Student student = new Student();
+       student.setSid(sid);
+       course_stu.setStudent(student);
+       PageInfo pageInfo = new PageInfo(selectedcourseMapper.selectCourseBySidAndStatus(course_stu));
+       return ResultVM.ok(pageInfo);
     }
 }

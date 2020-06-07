@@ -1,6 +1,7 @@
 package com.system.mapper;
 
 
+import com.github.pagehelper.PageInfo;
 import com.system.model.Course_Stu;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,6 +15,6 @@ public interface Course_StuMapper {
 
     List<Course_Stu> selectByscid(@Param("course_stu") Course_Stu course_stu);
 
-
+    List<Course_Stu> selectCourseBySidAndStatus(@Param("course_stu") Course_Stu course_stu);
 
 }

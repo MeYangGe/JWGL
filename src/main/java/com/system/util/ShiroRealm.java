@@ -49,7 +49,6 @@ public class ShiroRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-		System.out.println("这里是认证函数");
 		UsernamePasswordToken user = (UsernamePasswordToken) authenticationToken;
 
 		//查询用户信息
@@ -72,7 +71,6 @@ public class ShiroRealm extends AuthorizingRealm {
 		ByteSource credentialsSalt = ByteSource.Util.bytes(String.valueOf(upUser.getUid()));
 		SimpleAuthenticationInfo authenticationInfo = null; // new SimpleAuthenticationInfo(principal, credentials,
 		// realmName);
-		System.out.println(principal+"\t"+credentials+"\t"+credentialsSalt+"\t"+realmName);
 		authenticationInfo = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
 		return authenticationInfo;
 	}

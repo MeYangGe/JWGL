@@ -5,6 +5,7 @@ import com.system.model.Course;
 import com.system.mapper.CourseMapper;
 import com.system.service.CourseService;
 import com.github.pagehelper.PageHelper;
+import com.system.util.ResultVM;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +19,20 @@ public class CourseServiceImpl implements CourseService {
     CourseMapper courseMapper;
 
     @Override
-    public PageInfo selectAll(String key, int pageNum, int pageSize) {
+    public ResultVM selectAll(String key, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         //封装PageInfo分页工具类
         PageInfo pageInfo = new PageInfo(courseMapper.selectAll(key));
-        return pageInfo;
+        return ResultVM.ok(pageInfo);
     }
 
     @Override
-    public PageInfo selectCourseBySid(int pageNum,int pageSize) {
+    public ResultVM selectCourseBySid(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         Subject subject = SecurityUtils.getSubject();
         Integer sid = (Integer) subject.getPrincipal();
         //封装PageInfo分页工具类
         PageInfo pageInfo = new PageInfo(courseMapper.selectCourseBySid(sid));
-        return pageInfo;
+        return ResultVM.ok(pageInfo);
     }
 }
