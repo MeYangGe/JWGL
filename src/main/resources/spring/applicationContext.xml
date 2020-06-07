@@ -128,7 +128,7 @@
     <bean id="shiroFilter"
           class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
-        <property name="loginUrl" value="/login.html" />
+        <property name="loginUrl" value="index.jsp" />
         <property name="successUrl" value="/student/showCourse.html" />
         <property name="unauthorizedUrl" value="/error404.html" />
         <property name="filterChainDefinitionMap" ref="filterChainDefinition"></property>

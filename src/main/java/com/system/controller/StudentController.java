@@ -64,13 +64,13 @@ public class StudentController {
     @GetMapping("/courses")
     public ResultVM getAll(String key, @RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
         //返回定制实体类结果
-        return ResultVM.ok(courseService.selectAll(key,pageNum,pageSize));
+        return courseService.selectAll(key,pageNum,pageSize);
     }
     //分页以及带条件的查询学生已选课程ID
     @GetMapping("Selectedcourses")
     public ResultVM getSelectedcourses(@RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
         //返回定制实体类结果
-        return ResultVM.ok(courseService.selectCourseBySid(pageNum,pageSize));
+        return courseService.selectCourseBySid(pageNum,pageSize);
     }
     @GetMapping("Repairedcourses")
     public ResultVM getRepairedcourses(@RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){

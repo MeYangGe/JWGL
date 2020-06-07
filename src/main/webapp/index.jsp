@@ -9,6 +9,28 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/JWGL_war/student/courses",
+                //dataType: 'json',
+                dataType: 'JSONP',
+                jsonp:"jsonpCallback",
+                jsonpCallback:" callback",
+                success: function(msg){
+                    alert(msg);
+                }
+            });
+        });
+
+
+
+
+
+    </script>
 </head>
 <body>
 <h1><a href="TestCourse">点我测试</a></h1>
