@@ -25,9 +25,9 @@ public class FilterChainDefinitionMapBuilter {
 
 		linkedHashMap.put("/login", "anon");
 		
-		linkedHashMap.put("/student/*", "roles[student]");
+		linkedHashMap.put("/student/*", "roles[student,admin]");
 
-		linkedHashMap.put("/teacher/*", "roles[teacher]");
+		linkedHashMap.put("/teacher/*", "roles[teacher,admin]");
 		
 		linkedHashMap.put("/admin/*", "roles[admin]");
 		

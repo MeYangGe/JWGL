@@ -38,7 +38,7 @@ public class LoginController {
             }
         }
         if (currentUser.hasRole("admin")) {
-            return ResultVM.ok("");
+            return ResultVM.ok("身份验证成功拥有权限：admin");
         } else if (currentUser.hasRole("teacher")) {
             return ResultVM.ok("身份验证成功拥有权限：teacher");
         } else if (currentUser.hasRole("student")) {
