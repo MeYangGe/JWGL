@@ -14,6 +14,12 @@
         <association property="college" javaType="com.system.model.College" autoMapping="true">
         </association>
     </resultMap>
+
+    <resultMap id="DynamicQueryFind" type="course" autoMapping="true">
+        <result column="cid" jdbcType="INTEGER" property="cid"/>
+        <association property="teacher" javaType="com.system.model.Teacher" autoMapping="true"/>
+        <association property="college" javaType="com.system.model.College" autoMapping="true"/>
+    </resultMap>
 <!--模糊查询带分页的查询所有课程-->
     <select id="selectAll" resultMap="BaseResultMap">
 
@@ -40,5 +46,35 @@
 
 </select>
 
+<!--添加一个课程-->
+<insert id="addCourse" parameterType="Course">
+    insert into course(cname,schooltime,address,week,type,score,tid,collegeid)
+     values(#{cname},#{schoolTime},#{address},#{week},#{type},#{score},#{teacher.tid},#{college.collegeId})
+</insert>
+
+<!--删除一个课程-->
+<delete id="deleteCourse" >
+    delete from course where cid = #{cid}
+</delete>
+
+<!--修改一个课程-->
+<update id="updateCourse" parameterType="course" >
+    update course set
+        cname = #{cname},schooltime = #{schoolTime},
+        address = #{address},week = #{week},type = #{type},
+        score = #{score},tid = #{teacher.tid},collegeid = #{college.collegeId}
+         where cid = #{cid};
+</update>
+
+<select id="findAllByName" resultMap="DynamicQueryFind">
+    select c.cid,c.cname,c.schooltime,c.address,c.week,c.type,c.score,t.tid,t.name,ce.collegeid,ce.cname
+    from course c left join teacher t
+    on c.tid = t.tid left join college ce on c.collegeid = ce.collegeid
+    <where>
+    <if test="name != null and name != ''">
+        c.cname like '%${name}%'
+    </if>
+    </where>
+</select>
 
 </mapper>

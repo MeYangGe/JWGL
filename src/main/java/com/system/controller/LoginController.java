@@ -19,7 +19,11 @@ public class LoginController {
     //登陆操作
     @GetMapping("/login")
     public ResultVM login(User user){
-        System.out.println(user.toString());
+        //管理员测试账号
+//        user.setUid(10002);
+//        user.setPwd("123456");
+
+
         Subject currentUser = SecurityUtils.getSubject();
         //判断账号或密码是否为空
         if(null==user.getPwd()||null==user.getUid()){
