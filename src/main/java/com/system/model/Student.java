@@ -1,10 +1,10 @@
 package com.system.model;
 
-
+import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
-
+@Data
 public class Student implements Serializable{
     private Integer sid;
     private String name;

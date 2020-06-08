@@ -1,9 +1,9 @@
 package com.system.model;
 
-
+import lombok.Data;
 
 import java.io.Serializable;
-
+@Data
 public class Grade implements Serializable{
     private Student student;
     private Double score;
