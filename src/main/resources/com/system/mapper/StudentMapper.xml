@@ -11,6 +11,15 @@
 
 </association>
   </resultMap>
+
+  <resultMap id="BaseResultMap2" type="com.system.model.Student">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <association property="college" javaType="com.system.model.Course_Stu">
+      <result column="achievement" jdbcType="DOUBLE" property="achievement" />
+    </association>
+  </resultMap>
+
   <sql id="Base_Column_List">
     sid, name, sex, birthday, enrollment, collegeid
   </sql>
@@ -25,7 +34,12 @@
     where sid = #{sid,jdbcType=INTEGER}
   </select>
 
-
+  <!--根据课程ID查询学生-->
+  <select id="selectByCid" parameterType="java.lang.Integer" resultMap="BaseResultMap2">
+    select s.sid,s.name,cs.achievement
+    from course_stu cs left join student s on cs.sid=s.sid
+    where cid= #{cid,jdbcType=INTEGER}
+  </select>
 
 
 </mapper>

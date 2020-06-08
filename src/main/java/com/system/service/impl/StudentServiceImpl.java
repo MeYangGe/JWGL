@@ -1,5 +1,6 @@
 package com.system.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.system.model.Student;
 import com.system.mapper.StudentMapper;
 import com.system.service.StudentService;
@@ -41,4 +42,11 @@ public class StudentServiceImpl implements StudentService {
     public int updateByPrimaryKey(Student record) {
         return 0;
     }
+
+    @Override
+    public PageInfo<Student> selectByCid(int pageNum, int pageSize, Integer cid) {
+        return new PageInfo<Student>(studentMapper.selectByCid(cid));
+    }
+
+
 }

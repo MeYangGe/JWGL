@@ -78,15 +78,15 @@
 </select>
 
     <!--模糊查询带分页的查询老师教授课程-->
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectCourseByTidAndCname" resultType="com.system.model.Course">
         select cid,cname ,tid,schooltime,address ,week ,type,score
         from course
         <where>
-            <if test="cid!=null and cid!=''">
-                c.cname like '%${cid}%'
+            <if test="tid!=null and tid!=''">
+                and c.cname like '%${tid}%'
             </if>
             <if test="cname!=null and cname!=''">
-                c.cname like '%${cname}%'
+                and c.cname like '%${cname}%'
             </if>
         </where>
     </select>
