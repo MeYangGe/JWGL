@@ -1,10 +1,10 @@
 package com.system.model;
 
-import lombok.Data;
+
 
 import java.io.Serializable;
 import java.sql.Date;
-@Data
+
 public class Teacher implements Serializable{
     private Integer tid;
     private String name;

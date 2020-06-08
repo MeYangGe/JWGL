@@ -77,4 +77,17 @@
     </where>
 </select>
 
+    <!--模糊查询带分页的查询老师教授课程-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select cid,cname ,tid,schooltime,address ,week ,type,score
+        from course
+        <where>
+            <if test="cid!=null and cid!=''">
+                c.cname like '%${cid}%'
+            </if>
+            <if test="cname!=null and cname!=''">
+                c.cname like '%${cname}%'
+            </if>
+        </where>
+    </select>
 </mapper>

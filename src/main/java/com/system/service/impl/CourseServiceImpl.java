@@ -58,4 +58,12 @@ public class CourseServiceImpl implements CourseService {
         PageHelper.startPage(page, pageSize);
         return new PageInfo<>(courseMapper.findAllByName(name));
     }
+
+    @Override
+    public PageInfo<Course> selectCourseByTidAndCname(int pageNum, int pageSize,  String cname) {
+        PageHelper.startPage(pageNum,pageSize);
+        Subject subject = SecurityUtils.getSubject();
+        Integer tid = (Integer) subject.getPrincipal();
+        return new PageInfo<Course>(courseMapper.selectCourseByTidAndCname(tid, cname));
+    }
 }

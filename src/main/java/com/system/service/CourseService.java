@@ -38,4 +38,6 @@ public interface CourseService {
   * @return pageInfo对象
   */
  public PageInfo<Course> findAllByNameWithPage(int page, int pageSize, String name);
+
+ public PageInfo<Course> selectCourseByTidAndCname(int pageNum, int pageSize, String cname);
 }
