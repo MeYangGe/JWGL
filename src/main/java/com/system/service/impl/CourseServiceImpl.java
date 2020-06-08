@@ -35,4 +35,27 @@ public class CourseServiceImpl implements CourseService {
         PageInfo pageInfo = new PageInfo(courseMapper.selectCourseBySid(sid));
         return ResultVM.ok(pageInfo);
     }
+
+
+
+    @Override
+    public int addCourse(Course course) {
+        return courseMapper.addCourse(course);
+    }
+
+    @Override
+    public int deleteCourse(Integer cid) {
+        return courseMapper.deleteCourse(cid);
+    }
+
+    @Override
+    public int updateCourse(Course course) {
+        return courseMapper.updateCourse(course);
+    }
+
+    @Override
+    public PageInfo<Course> findAllByNameWithPage(int page, int pageSize, String name) {
+        PageHelper.startPage(page, pageSize);
+        return new PageInfo<>(courseMapper.findAllByName(name));
+    }
 }

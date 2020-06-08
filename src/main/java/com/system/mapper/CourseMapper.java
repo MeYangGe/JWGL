@@ -10,4 +10,13 @@ public interface CourseMapper {
     List<Course> selectAll(@Param("key") String key);
 
     List<Course> selectCourseBySid(@Param("sid") Integer sid);
+
+    //    分割线
+    int addCourse(Course course);
+
+    int deleteCourse(Integer cid);
+
+    int updateCourse(Course course);
+
+    List<Course> findAllByName(@Param("name") String name);
 }

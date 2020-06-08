@@ -13,6 +13,11 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--解决跨域问题-->
+    <mvc:cors>
+        <mvc:mapping path="/**" allowed-methods="*" allowed-origins="*" allowed-headers="*"/>
+    </mvc:cors>
+
     <!--扫描包-->
     <context:component-scan base-package="com.system">
         <!--只扫描下面的注解-->
@@ -35,10 +40,6 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!--解决跨域问题-->
-    <mvc:cors>
-        <mvc:mapping path="/**" />
-    </mvc:cors>
 
    <!-- &lt;!&ndash;视图解析器&ndash;&gt;
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

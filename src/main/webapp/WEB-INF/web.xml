@@ -9,7 +9,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/applicationContext*.xml</param-value>
     </context-param>
-    
+
     <!--配置统一编码格式-->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -20,14 +20,6 @@
         </init-param>
     </filter>
 
-
-
-    <!-- Shiro Filter is defined in the spring application context: -->
-    <!--
-    1. 配置  Shiro 的 shiroFilter.
-    2. DelegatingFilterProxy 实际上是 Filter 的一个代理对象. 默认情况下, Spring 会到 IOC 容器中查找和
-    <filter-name> 对应的 filter bean. 也可以通过 targetBeanName 的初始化参数来配置 filter bean 的 id.
-    -->
     <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

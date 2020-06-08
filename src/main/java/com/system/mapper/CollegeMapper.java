@@ -1,6 +1,10 @@
 package com.system.mapper;
 
 
-public interface CollegeMapper {
+import com.system.model.College;
 
+import java.util.List;
+
+public interface CollegeMapper {
+    List<College> findAll();
 }

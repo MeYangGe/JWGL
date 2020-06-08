@@ -6,5 +6,9 @@
     <result column="cname" jdbcType="VARCHAR" property="cname" />
   </resultMap>
 
+  <!--获得所有的学院信息-->
+    <select id="findAll" resultType="college">
+        select * from college
+    </select>
 
 </mapper>
