@@ -1,5 +1,6 @@
 package com.system.service;
 
+import com.github.pagehelper.PageInfo;
 import com.system.model.Teacher;
 import java.util.List;
 
@@ -13,4 +14,34 @@ public interface TeacherService {
      * @return 教师信息
      */
     List<Teacher> findAll();
+
+    /***
+     * 添加一条数据
+     * @param teacher   老师对象
+     * @return  受影响行数
+     */
+    int addTeacher(Teacher teacher);
+
+    /***
+     * 删除一条数据
+     * @param tid   老师id
+     * @return  受影响行数
+     */
+    int deleteTeacher(Integer tid);
+
+    /***
+     * 修改一条数据
+     * @param teacher   老师对象
+     * @return  受影响行数
+     */
+    int updateTeacher(Teacher teacher);
+
+    /***
+     * 动态分页查询数据
+     * @param page  当前页
+     * @param pageSize  每页多少条
+     * @param name  老师名字
+     * @return  pageInfo对象
+     */
+    PageInfo<Teacher> findAllByNameWithPage(int page, int pageSize, String name);
 }

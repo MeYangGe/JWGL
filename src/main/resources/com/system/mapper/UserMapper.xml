@@ -46,9 +46,12 @@ where
 	u.uid = #{uid,jdbcType=VARCHAR}
 </select>
 <update id="updateByPrimaryKeySelective">
-update user set pwd=#{user.pwd,jdbcType=VARCHAR} where uid=#{user.uid,jdbcType=INTEGER}
+update user set pwd=#{user.pwd} where uid=#{user.uid} and
 </update>
 
-
+<!--修改密码，并校验就密码-->
+<update id="updateUser">
+    update user set pwd = #{user.pwd} where uname = #{user.uname} and pwd = #{user.pwd}
+</update>
 
 </mapper>
