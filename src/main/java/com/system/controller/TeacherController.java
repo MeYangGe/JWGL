@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 /**
  * @author JC
  * @date 2020/6/8 15:49
@@ -33,7 +32,6 @@ public class TeacherController {
         List<Teacher> all = teacherService.findAll();
         return ResultVM.ok(all);
     }
-
 
     //动态分页查询课程
     @PostMapping("/getCourseByTAC")
