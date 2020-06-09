@@ -5,17 +5,38 @@ import com.system.model.Student;
 import org.springframework.stereotype.Service;
 
 public interface StudentService {
-    public int deleteByPrimaryKey(Integer sid);
-
-    public int insert(Student record);
-
-    public int insertSelective(Student record);
 
     public  Student selectByPrimaryKey(Integer sid);
 
-    public int updateByPrimaryKeySelective(Student record);
-
-    public int updateByPrimaryKey(Student record);
-
     public PageInfo<Student> selectByCid(int pageNum, int pageSize,Integer cid);
+
+    /***
+     *  添加一条数据
+     * @param student   学生对象
+     * @return  受影响行数
+     */
+    int addStudent(Student student);
+
+    /***
+     * 删除一条数据
+     * @param sid   学生id
+     * @return  受影响行数
+     */
+    int deleteStudent(Integer sid);
+
+    /***
+     *  修改一条数据
+     * @param student   学生对象
+     * @return  受影响行数
+     */
+    int updateStudent(Student student);
+
+    /***
+     *  动态分页查询信息
+     * @param page  当前页
+     * @param pageSize  每页条数
+     * @param name  学生名
+     * @return
+     */
+    PageInfo<Student> findAllByNameWithPage(int page, int pageSize, String name);
 }

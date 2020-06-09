@@ -17,4 +17,7 @@ public interface Course_StuMapper {
 
     List<Course_Stu> selectCourseBySidAndStatus(@Param("course_stu") Course_Stu course_stu);
 
+    int deleteCourse_stuByCid(Integer cid);
+
+    int deleteCourse_stuBySid(Integer sid);
 }

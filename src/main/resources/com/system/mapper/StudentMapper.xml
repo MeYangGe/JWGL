@@ -41,5 +41,32 @@
     where cid= #{cid,jdbcType=INTEGER}
   </select>
 
+<!--添加一条数据-->
+<insert id="addStudent" parameterType="student">
+    insert into student(name,sex,birthday,enrollment,collegeid)
+        values(#{name},#{sex},#{birthday},#{enrollment},#{college.collegeId})
+</insert>
 
+<!--修改一条数据-->
+<update id="updateStudent" parameterType="student">
+    update student set
+    name = #{name},sex = #{sex},birthday = #{birthday},enrollment=#{enrollment},
+    collegeid = #{college.collegeId} where sid = #{sid}
+</update>
+
+<!--删除一条数据-->
+<delete id="deleteStudent">
+delete from student where sid = #{sid}
+</delete>
+
+<!--动态分页查询数据-->
+<select id="findAllByName" resultMap="BaseResultMap">
+    select s.sid,s.name,s.sex,s.birthday,s.enrollment,c.collegeid,c.cname
+    from student s left join college c on s.collegeid = c.collegeid
+    <where>
+        <if test="name != null and name != ''">
+        s.name like '%${name}%'
+        </if>
+    </where>
+</select>
 </mapper>

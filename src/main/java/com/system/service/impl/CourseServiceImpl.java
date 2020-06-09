@@ -1,6 +1,7 @@
 package com.system.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import com.system.mapper.Course_StuMapper;
 import com.system.model.Course;
 import com.system.mapper.CourseMapper;
 import com.system.service.CourseService;
@@ -17,6 +18,9 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseMapper courseMapper;
+
+    @Autowired
+    private Course_StuMapper cs;
 
     @Override
     public ResultVM selectAll(String key, int pageNum, int pageSize) {
@@ -45,6 +49,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public int deleteCourse(Integer cid) {
+        //在删除课程的同时，将他的学生删除
+        cs.deleteCourse_stuByCid(cid);
         return courseMapper.deleteCourse(cid);
     }
 
