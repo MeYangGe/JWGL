@@ -45,4 +45,12 @@ SELECT * from course_stu cs LEFT JOIN course c on cs.cid=c.cid LEFT JOIN student
  <delete id="deleteCourse_stuBySid" >
     delete from course_stu where sid = #{sid}
 </delete>
+
+    <!--学生课程打分-->
+    <update id="upadteAchievement">
+        update  coures_stu set achievement=#{course_stu.student.achievement,jdbcType=DOUBLE}
+        where cid=cid=#{course_stu.course.cid,jdbcType=INTEGER} and sid=#{course_stu.student.sid,jdbcType=INTEGER}
+    </update>
+
+
 </mapper>

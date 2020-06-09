@@ -2,9 +2,11 @@ package com.system.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.system.model.Course;
+import com.system.model.Course_Stu;
 import com.system.model.Student;
 import com.system.model.Teacher;
 import com.system.service.CourseService;
+import com.system.service.Course_StuService;
 import com.system.service.StudentService;
 import com.system.service.TeacherService;
 import com.system.util.ResultVM;
@@ -25,6 +27,8 @@ public class TeacherController {
     private CourseService courseService;
     @Autowired
     private  StudentService studentService;
+
+    private Course_StuService course_stuService;
 
     //获得所有的教师
     @GetMapping("/findAll")
@@ -59,6 +63,16 @@ public class TeacherController {
         resultVM.setMsg("查询成功!");
         resultVM.setResult(allStu);
         return resultVM;
+    }
+
+    //给学生课程打分
+    @PostMapping("/upadteAchievement")
+    public ResultVM upadteAchievement(Course_Stu course_stu){
+        int i = course_stuService.upadteAchievement(course_stu);
+        if (i > 0) {
+            return ResultVM.ok("打分成功");
+        }
+        return ResultVM.ok("打分失败");
     }
 
 

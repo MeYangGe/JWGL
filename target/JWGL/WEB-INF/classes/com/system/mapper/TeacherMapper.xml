@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.TeacherMapper">
+    <resultMap id="BaseResultMap" type="com.system.model.Teacher">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="birthady" jdbcType="DATE" property="birthday"/>
+        <result column="edu" jdbcType="VARCHAR" property="edu"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="hiredate" jdbcType="DATE" property="hireDate"/>
+        <association property="college" javaType="com.system.model.College" autoMapping="true">
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+
+    tid, name, sex, birthday, edu, title, hiredate, cid
+
+    </sql>
+
+    <!--获得所有的教师信息-->
+    <select id="findAll" resultType="teacher">
+        select * from teacher
+    </select>
+<!--动态获得教师信息-->
+<select id="findAllByName" resultMap="BaseResultMap">
+    select t.tid,t.name,t.sex,t.birthady,t.edu,t.title,t.hiredate,c.collegeid,c.cname
+    from teacher t left join college c on t.collegeid = c.collegeid
+    <where>
+    <if test="name != null and name != ''">
+     t.name like '%${name}%'
+    </if>
+    </where>
+</select>
+<!--添加一条数据-->
+<insert id="addTeacher" parameterType="teacher">
+    insert into teacher(name,sex,birthady,edu,title,hiredate,collegeid)
+    values(#{name},#{sex},#{birthday},#{edu},#{title},#{hireDate},#{college.collegeId})
+</insert>
+
+<!--删除一条数据-->
+<delete id="deleteTeacher">
+    delete from teacher where tid = #{tid}
+</delete>
+
+<!--修改一条数据-->
+<update id="updateTeacher" parameterType="teacher">
+    update teacher set name = #{name},sex = #{sex},birthady = #{birthday},
+    edu = #{edu},title = #{title},hiredate = #{hireDate},collegeid = #{college.collegeId}
+    where tid = #{tid}
+</update>
+</mapper>

@@ -13,6 +13,9 @@ public interface Course_StuMapper {
 
     int upadte(@Param("course_stu") Course_Stu course_stu);
 
+
+    int upadteAchievement(@Param("course_stu") Course_Stu course_stu);
+
     List<Course_Stu> selectByscid(@Param("course_stu") Course_Stu course_stu);
 
     List<Course_Stu> selectCourseBySidAndStatus(@Param("course_stu") Course_Stu course_stu);
@@ -20,4 +23,6 @@ public interface Course_StuMapper {
     int deleteCourse_stuByCid(Integer cid);
 
     int deleteCourse_stuBySid(Integer sid);
+
+
 }

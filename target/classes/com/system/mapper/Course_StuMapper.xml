@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapper.Course_StuMapper">
+<resultMap id="BaseResultMap" type="com.system.model.Course_Stu">
+    <id property="csi" column="csi" />
+    <association property="course" javaType="com.system.model.Course" autoMapping="true">
+    <id property="cid" column="cid"></id>
+</association>
+    <association property="student" javaType="com.system.model.Student" autoMapping="true">
+
+    <id property="sid" column="sid"></id>
+</association>
+</resultMap>
+
+    <select id="selectByscid" resultMap="BaseResultMap">
+        SELECT cid,sid from course_stu where sid=#{course_stu.student.sid,jdbcType=INTEGER}
+        and cid=#{course_stu.course.cid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" >
+insert into course_stu(cid,sid,achievement,status) values (#{course_stu.course.cid,jdbcType=INTEGER},
+#{course_stu.student.sid,jdbcType=INTEGER},null,0)
+
+</insert>
+
+<delete id="upadte">
+update course_stu set status=2 where cid=#{course_stu.course.cid,jdbcType=INTEGER} and
+ sid=#{course_stu.student.sid,jdbcType=INTEGER}
+
+</delete>
+
+
+<select id="selectCourseBySidAndStatus" resultMap="BaseResultMap">
+SELECT * from course_stu cs LEFT JOIN course c on cs.cid=c.cid LEFT JOIN student s on cs.sid=s.sid where cs.sid=#{course_stu.student.sid,jdbcType=INTEGER}
+        and cs.status=${2}
+</select>
+
+
+<!--删除关系数据，根据课程id-->
+ <delete id="deleteCourse_stuByCid" >
+    delete from course_stu where cid = #{cid}
+</delete>
+
+<!--删除关系数据，根据学生id-->
+ <delete id="deleteCourse_stuBySid" >
+    delete from course_stu where sid = #{sid}
+</delete>
+</mapper>

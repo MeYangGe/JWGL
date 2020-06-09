@@ -83,4 +83,9 @@ public class Course_StuServiceImpl implements Course_StuService {
        PageInfo pageInfo = new PageInfo(selectedcourseMapper.selectCourseBySidAndStatus(course_stu));
        return ResultVM.ok(pageInfo);
     }
+
+    @Override
+    public int upadteAchievement(Course_Stu course_stu) {
+        return selectedcourseMapper.upadteAchievement(course_stu);
+    }
 }
