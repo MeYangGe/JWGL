@@ -38,7 +38,7 @@ public class TeacherController {
     }
 
     //动态分页查询课程
-    @PostMapping("/getCourseByTAC")
+    @GetMapping("/getCourseByTAC")
     public ResultVM getCourseByTAC(
             String cname,
             @RequestParam(value = "page",defaultValue = "1") Integer pageNum,

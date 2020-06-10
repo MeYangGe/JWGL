@@ -79,14 +79,14 @@
 
     <!--模糊查询带分页的查询老师教授课程-->
     <select id="selectCourseByTidAndCname" resultType="com.system.model.Course">
-        select cid,cname ,tid,schooltime,address ,week ,type,score
+        select cid as courseid ,cname as coursename ,tid,schooltime,address ,week ,type,score
         from course
         <where>
             <if test="tid!=null and tid!=''">
-                and c.cname like '%${tid}%'
+                and tid like '%${tid}%'
             </if>
             <if test="cname!=null and cname!=''">
-                and c.cname like '%${cname}%'
+                and cname like '%${cname}%'
             </if>
         </where>
     </select>

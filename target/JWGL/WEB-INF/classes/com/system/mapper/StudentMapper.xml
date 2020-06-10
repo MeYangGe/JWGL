@@ -38,7 +38,7 @@
   <select id="selectByCid" parameterType="java.lang.Integer" resultMap="BaseResultMap2">
     select s.sid,s.name,cs.achievement
     from course_stu cs left join student s on cs.sid=s.sid
-    where cid= #{cid,jdbcType=INTEGER}
+    where cs.cid= #{cid,jdbcType=INTEGER}
   </select>
 
 <!--添加一条数据-->
