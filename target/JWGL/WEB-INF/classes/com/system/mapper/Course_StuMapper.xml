@@ -3,6 +3,7 @@
 <mapper namespace="com.system.mapper.Course_StuMapper">
 <resultMap id="BaseResultMap" type="com.system.model.Course_Stu">
     <id property="csi" column="csi" />
+    <result column="achievement" jdbcType="DOUBLE" property="achievement"/>
     <association property="course" javaType="com.system.model.Course" autoMapping="true">
     <id property="cid" column="cid"></id>
 </association>
@@ -48,8 +49,8 @@ SELECT * from course_stu cs LEFT JOIN course c on cs.cid=c.cid LEFT JOIN student
 
     <!--学生课程打分-->
     <update id="upadteAchievement">
-        update  coures_stu set achievement=#{course_stu.student.achievement,jdbcType=DOUBLE}
-        where cid=cid=#{course_stu.course.cid,jdbcType=INTEGER} and sid=#{course_stu.student.sid,jdbcType=INTEGER}
+        update  course_stu set achievement=#{course_stu.achievement,jdbcType=DOUBLE}
+        where cid=#{course_stu.course.cid,jdbcType=INTEGER} and sid=#{course_stu.student.sid,jdbcType=INTEGER}
     </update>
 
 
