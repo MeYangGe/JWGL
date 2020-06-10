@@ -1,14 +1,8 @@
 package com.system.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.system.model.Course;
-import com.system.model.Course_Stu;
-import com.system.model.Student;
-import com.system.model.Teacher;
-import com.system.service.CourseService;
-import com.system.service.Course_StuService;
-import com.system.service.StudentService;
-import com.system.service.TeacherService;
+import com.system.model.*;
+import com.system.service.*;
 import com.system.util.ResultVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +21,11 @@ public class TeacherController {
     private CourseService courseService;
     @Autowired
     private  StudentService studentService;
+    @Autowired
+    private Course_StuService course_StuService;
+    @Autowired
+    private Course_StuExpandService course_StuExpandService;
 
-    private Course_StuService course_stuService;
 
     //获得所有的教师
     @GetMapping("/findAll")
@@ -48,27 +45,14 @@ public class TeacherController {
         resultVM.setCode(200);
         resultVM.setMsg("查询成功!");
         resultVM.setResult(allByTACWithPage);
-        return resultVM;
+        return ResultVM.ok(allByTACWithPage);
     }
 
-    //课程下学生带分页
-    @PostMapping("/getByCid")
-    public ResultVM getByCid(
-            int cid,
-            @RequestParam(value = "page",defaultValue = "1") Integer pageNum,
-            @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
-        PageInfo<Student> allStu = studentService.selectByCid(pageNum, pageSize, cid);
-        ResultVM resultVM = new ResultVM();
-        resultVM.setCode(200);
-        resultVM.setMsg("查询成功!");
-        resultVM.setResult(allStu);
-        return resultVM;
-    }
 
     //给学生课程打分
     @PostMapping("/upadteAchievement")
     public ResultVM upadteAchievement(Course_Stu course_stu){
-        int i = course_stuService.upadteAchievement(course_stu);
+        int i = course_StuService.upadteAchievement(course_stu);
         if (i > 0) {
             return ResultVM.ok("打分成功");
         }
@@ -112,5 +96,13 @@ public class TeacherController {
         return ResultVM.ok(pageInfo);
     }
 
+    //课程下学生带分页
+    @GetMapping("/findAllByCid")
+    public ResultVM findAllByName(int cid,
+                                  @RequestParam(defaultValue = "1")Integer page,
+                                  @RequestParam(defaultValue = "3")Integer pageSize){
+        PageInfo<Course_StuExpand> pageInfo =course_StuExpandService.selectByCid(page, pageSize, cid);
+        return ResultVM.ok(pageInfo);
+    }
 
 }

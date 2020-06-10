@@ -8,7 +8,6 @@ public interface StudentService {
 
     public  Student selectByPrimaryKey(Integer sid);
 
-    public PageInfo<Student> selectByCid(int pageNum, int pageSize,Integer cid);
 
     /***
      *  添加一条数据

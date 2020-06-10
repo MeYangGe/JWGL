@@ -28,7 +28,7 @@
         </tx:attributes>
     </tx:advice>
 
-    <!--&lt;!&ndash;aop配置&ndash;&gt;
+   <!-- &lt;!&ndash;aop配置&ndash;&gt;
     <aop:config>
         &lt;!&ndash;配置切点&ndash;&gt;
         <aop:pointcut id="p1" expression="execution(* com.system.service.impl.*.*(..))"/>

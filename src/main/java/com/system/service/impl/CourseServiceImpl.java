@@ -70,6 +70,7 @@ public class CourseServiceImpl implements CourseService {
         PageHelper.startPage(pageNum,pageSize);
         Subject subject = SecurityUtils.getSubject();
         Integer tid = (Integer) subject.getPrincipal();
+
         return new PageInfo<Course>(courseMapper.selectCourseByTidAndCname(tid, cname));
     }
 }

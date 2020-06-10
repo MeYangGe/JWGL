@@ -28,11 +28,11 @@
         </tx:attributes>
     </tx:advice>
 
-    <!--aop配置-->
+   <!-- &lt;!&ndash;aop配置&ndash;&gt;
     <aop:config>
-        <!--配置切点-->
+        &lt;!&ndash;配置切点&ndash;&gt;
         <aop:pointcut id="p1" expression="execution(* com.system.service.impl.*.*(..))"/>
-        <!--配置顾问-->
+        &lt;!&ndash;配置顾问&ndash;&gt;
         <aop:advisor advice-ref="txAdvice" pointcut-ref="p1"/>
-    </aop:config>
+    </aop:config>-->
 </beans>
