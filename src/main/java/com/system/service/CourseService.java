@@ -34,7 +34,7 @@ public interface CourseService {
   * 根据名字 动态分页查询
   * @param page 当前页
   * @param pageSize 每页条数
-  * @param name 课程名
+  * @param name 老师名
   * @return pageInfo对象
   */
  public PageInfo<Course> findAllByNameWithPage(int page, int pageSize, String name);
