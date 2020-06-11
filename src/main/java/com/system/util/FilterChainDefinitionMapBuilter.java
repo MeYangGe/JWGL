@@ -25,11 +25,11 @@ public class FilterChainDefinitionMapBuilter {
 
 		linkedHashMap.put("/login", "anon");
 		
-		linkedHashMap.put("/student/*", "roles[student,admin]");
+		linkedHashMap.put("/student/**", "roles[student,admin]");
 
-		linkedHashMap.put("/teacher/*", "roles[teacher,admin]");
+		linkedHashMap.put("/teacher/**", "roles[teacher,admin]");
 		
-		linkedHashMap.put("/admin/*", "roles[admin]");
+		linkedHashMap.put("/admin/**", "roles[admin]");
 		
 		linkedHashMap.put("/logout", "logout");
 		

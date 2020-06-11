@@ -11,10 +11,9 @@ import org.apache.shiro.util.ByteSource;
  * @date 2020/6/7 13:18
  */
 public class MD5 {
-    public static String getMD5(String Resources) {
-        Subject subject = SecurityUtils.getSubject();
+    public static String getMD5(String Resources,Object uid) {
         SimpleHash simpleHash = new SimpleHash("MD5", Resources,
-                ByteSource.Util.bytes(String.valueOf(subject.getPrincipal())), 1024);
+                ByteSource.Util.bytes(String.valueOf(uid)), 1024);
         return simpleHash.toString();
     }
 

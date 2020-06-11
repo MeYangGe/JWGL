@@ -18,7 +18,6 @@ public class CorsFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("这是跨域过滤器");
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
         resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));

@@ -36,7 +36,7 @@ public class TeacherServiceImpl implements TeacherService {
     public int addTeacher(Teacher teacher) {
         int i = teacherMapper.addTeacher(teacher);
         //添加到 user 表
-        userMapper.addUser(new User(teacher.getTid(),teacher.getName(), MD5.getMD5("123456"),new Role(2)));
+        //userMapper.addUser(new User(teacher.getTid(),teacher.getName(), MD5.getMD5("123456"),new Role(2)));
         return i;
     }
 

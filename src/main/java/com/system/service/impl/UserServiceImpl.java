@@ -54,9 +54,9 @@ public class UserServiceImpl implements UserService {
     public ResultVM updateByPrimaryKeySelective(String oldpwd, String newpwd) {
         Subject subject = SecurityUtils.getSubject();
         User user = selectByPrimaryKey(Integer.valueOf((Integer) subject.getPrincipal()));
-        String md5 = MD5.getMD5(oldpwd);
+        String md5 = MD5.getMD5(oldpwd,subject.getPrincipal());
         if(md5.equals(user.getPwd())){
-            user.setPwd(MD5.getMD5(newpwd));
+            user.setPwd(MD5.getMD5(newpwd,subject.getPrincipal()));
             userMapper.updateByPrimaryKeySelective(user);
             return  ResultVM.ok("修改成功");
         }else{

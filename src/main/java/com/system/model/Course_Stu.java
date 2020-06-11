@@ -1,7 +1,6 @@
 package com.system.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by MeYanGe on 2020/6/5.

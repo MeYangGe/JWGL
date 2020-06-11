@@ -52,6 +52,7 @@ public class StudentController {
     public ResultVM outCourse(@PathVariable("cid") Integer cid){
         return course_stuService.upadte(cid);
     }
+
     //分页以及带条件的查询所有课程
     @GetMapping("/courses")
     public ResultVM getAll(String key, @RequestParam(name = "pageNum",defaultValue = "1") int pageNum, @RequestParam(name = "pageSize",defaultValue = "4") int pageSize){
