@@ -34,7 +34,7 @@ update course_stu set status=2 where cid=#{course_stu.course.cid,jdbcType=INTEGE
 
 <select id="selectCourseBySidAndStatus" resultMap="BaseResultMap">
 SELECT * from course_stu cs LEFT JOIN course c on cs.cid=c.cid LEFT JOIN student s on cs.sid=s.sid LEFT JOIN teacher t on c.tid=t.tid  where cs.sid=#{course_stu.student.sid,jdbcType=INTEGER}
-        and cs.status=${2}
+        and cs.status=${1}
 </select>
 
 

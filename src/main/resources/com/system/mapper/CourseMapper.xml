@@ -42,7 +42,7 @@
         c.schooltime ,c.address ,c.week,
         c.type,c.score from course c LEFT JOIN teacher
         t on c.tid=t.tid LEFT JOIN course_stu cs on c.cid = cs.cid
-         where cs.sid =#{sid,jdbcType=INTEGER}
+         where cs.sid =#{sid,jdbcType=INTEGER} and cs.status !=${2}
 
 </select>
 
