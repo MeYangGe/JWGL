@@ -38,4 +38,9 @@ public interface StudentService {
      * @return
      */
     PageInfo<Student> findAllByNameWithPage(int page, int pageSize, String name);
+
+    /***
+     * @return 所有课程条数
+     */
+    int getTotalNum();
 }

@@ -14,5 +14,7 @@ public interface TeacherMapper {
 
     int updateTeacher(Teacher teacher);
 
+    int getTotalNum();
+
     List<Teacher> findAllByName(@Param("name") String name);
 }

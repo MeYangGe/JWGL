@@ -18,6 +18,8 @@ public interface CourseMapper {
 
     int updateCourse(Course course);
 
+    int getTotalNum();
+
     List<Course> findAllByName(@Param("name") String name);
 
     List<Course> selectCourseByTidAndCname(@Param("tid") Integer tid,@Param("cname") String cname);

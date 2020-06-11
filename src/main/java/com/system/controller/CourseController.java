@@ -66,4 +66,11 @@ public class CourseController {
         return ResultVM.error("删除失败！");
     }
 
+    //获得所有的条数
+    @GetMapping("/getTotalNum")
+    public Integer getTotalNum(){
+        int totalNum = courseService.getTotalNum();
+        return totalNum;
+    }
+
 }

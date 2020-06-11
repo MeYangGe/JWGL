@@ -73,4 +73,9 @@ public class CourseServiceImpl implements CourseService {
 
         return new PageInfo<Course>(courseMapper.selectCourseByTidAndCname(tid, cname));
     }
+
+    @Override
+    public int getTotalNum() {
+        return courseMapper.getTotalNum();
+    }
 }

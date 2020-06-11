@@ -29,7 +29,7 @@
 
 
 <!--添加一条数据-->
-<insert id="addStudent" parameterType="student">
+<insert id="addStudent" parameterType="student" keyProperty="sid" useGeneratedKeys="true">
     insert into student(name,sex,birthday,enrollment,collegeid)
         values(#{name},#{sex},#{birthday},#{enrollment},#{college.collegeId})
 </insert>
@@ -55,5 +55,10 @@ delete from student where sid = #{sid}
         s.name like '%${name}%'
         </if>
     </where>
+</select>
+
+<!--获得总条数-->
+<select id="getTotalNum" resultType="int">
+    select count(1) from student
 </select>
 </mapper>

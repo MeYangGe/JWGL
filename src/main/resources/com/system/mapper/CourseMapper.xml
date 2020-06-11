@@ -90,4 +90,9 @@
             </if>
         </where>
     </select>
+
+<!--获得总条数-->
+<select id="getTotalNum"  resultType="int">
+    select count(1) from course
+</select>
 </mapper>

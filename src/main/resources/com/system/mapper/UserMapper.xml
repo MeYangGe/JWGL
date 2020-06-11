@@ -45,8 +45,10 @@ from
 where
 	u.uid = #{uid,jdbcType=VARCHAR}
 </select>
+
+<!--修改非管理员密码-->
 <update id="updateByPrimaryKeySelective">
-update user set pwd=#{user.pwd} where uid=#{user.uid} and
+    update user set pwd=#{user.pwd} where uname=#{user.uname} and rid!=1
 </update>
 
 <!--修改密码，并校验就密码-->
@@ -69,4 +71,5 @@ delete from user where uid = #{uid}
 <update id="updateUserByInfo">
     update user set uname = #{uname} where uid = #{uid}
 </update>
+
 </mapper>
