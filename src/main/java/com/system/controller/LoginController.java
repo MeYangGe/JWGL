@@ -19,9 +19,9 @@ public class LoginController {
     //登陆操作
     @GetMapping("/login")
     public ResultVM login(User user){
-       /* //管理员测试账号
+        //管理员测试账号
         user.setUid(10002);
-        user.setPwd("123456");*/
+        user.setPwd("123456");
 
 
         Subject currentUser = SecurityUtils.getSubject();

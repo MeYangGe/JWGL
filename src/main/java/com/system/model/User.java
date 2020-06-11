@@ -1,9 +1,13 @@
 package com.system.model;
 
-import lombok.Data;
+import lombok.*;
+import org.apache.ibatis.annotations.ConstructorArgs;
+
 import java.io.Serializable;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable{
     private Integer uid;
     private String uname;

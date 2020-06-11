@@ -1,9 +1,16 @@
 package com.system.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import java.io.Serializable;
 @Data
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Role implements Serializable{
+    @NonNull
     private Integer rid;
     private String roleName;
     private String permissions;

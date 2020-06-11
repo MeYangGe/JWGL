@@ -21,4 +21,12 @@ public interface UserMapper {
     //修改密码，并校验旧密码
     int updateUser(@Param("oldPwd") String oldPwd,@Param("user") User user);
 
+    //添加一个用户
+    int addUser(User user);
+
+    //删除一条数据
+    int deleteUser(Integer uid);
+
+    //修改用户信息
+    int updateUserByInfo(User user);
 }

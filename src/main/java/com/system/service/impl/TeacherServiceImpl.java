@@ -4,8 +4,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.system.mapper.CourseMapper;
 import com.system.mapper.TeacherMapper;
+import com.system.mapper.UserMapper;
+import com.system.model.Role;
 import com.system.model.Teacher;
+import com.system.model.User;
 import com.system.service.TeacherService;
+import com.system.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,9 @@ public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private TeacherMapper teacherMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public List<Teacher> findAll() {
         return teacherMapper.findAll();
@@ -27,16 +34,26 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int addTeacher(Teacher teacher) {
-        return teacherMapper.addTeacher(teacher);
+        int i = teacherMapper.addTeacher(teacher);
+        //添加到 user 表
+        userMapper.addUser(new User(teacher.getTid(),teacher.getName(), MD5.getMD5("123456"),new Role(2)));
+        return i;
     }
 
     @Override
     public int deleteTeacher(Integer tid) {
+        //从user表删除
+        userMapper.deleteUser(tid);
         return teacherMapper.deleteTeacher(tid);
     }
 
     @Override
     public int updateTeacher(Teacher teacher) {
+        //如果修改了名字，则user表一起修改
+        User user = new User();
+        user.setUid(teacher.getTid());
+        user.setUname(teacher.getName());
+        userMapper.updateUserByInfo(user);
         return teacherMapper.updateTeacher(teacher);
     }
 

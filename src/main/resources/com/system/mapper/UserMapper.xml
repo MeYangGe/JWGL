@@ -54,4 +54,19 @@ update user set pwd=#{user.pwd} where uid=#{user.uid} and
     update user set pwd = #{user.pwd} where uname = #{user.uname} and pwd = #{user.pwd}
 </update>
 
+<!--添加一条数据-->
+<insert id="addUser">
+    insert into user(uid,uname,pwd,rid)
+    values(#{uid},#{uname},#{pwd},#{role.rid})
+</insert>
+
+<!--删除一条数据-->
+<delete id="deleteUser">
+delete from user where uid = #{uid}
+</delete>
+
+<!--修改一条数据-->
+<update id="updateUserByInfo">
+    update user set uname = #{uname} where uid = #{uid}
+</update>
 </mapper>

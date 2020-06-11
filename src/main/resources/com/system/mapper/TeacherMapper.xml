@@ -33,7 +33,7 @@
     </where>
 </select>
 <!--添加一条数据-->
-<insert id="addTeacher" parameterType="teacher">
+<insert id="addTeacher" parameterType="teacher" useGeneratedKeys="true" keyProperty="tid">
     insert into teacher(name,sex,birthady,edu,title,hiredate,collegeid)
     values(#{name},#{sex},#{birthday},#{edu},#{title},#{hireDate},#{college.collegeId})
 </insert>
