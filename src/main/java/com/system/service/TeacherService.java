@@ -44,4 +44,9 @@ public interface TeacherService {
      * @return  pageInfo对象
      */
     PageInfo<Teacher> findAllByNameWithPage(int page, int pageSize, String name);
+
+    /***
+     * @return 所有课程条数
+     */
+    int getTotalNum();
 }

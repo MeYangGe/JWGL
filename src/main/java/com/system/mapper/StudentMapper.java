@@ -17,5 +17,7 @@ public interface StudentMapper {
 
     int updateStudent(Student student);
 
+    int getTotalNum();
+
     List<Student> findAllByName(@Param("name") String name);
 }

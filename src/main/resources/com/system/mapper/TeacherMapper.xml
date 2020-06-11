@@ -49,4 +49,9 @@
     edu = #{edu},title = #{title},hiredate = #{hireDate},collegeid = #{college.collegeId}
     where tid = #{tid}
 </update>
+
+<!--获得总条数-->
+<select id="getTotalNum"  resultType="int">
+    select count(1) from teacher
+</select>
 </mapper>

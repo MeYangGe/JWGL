@@ -35,20 +35,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.getPermissions(uid);
     }
 
-    @Override
-    public int deleteByPrimaryKey(Integer uid) {
-        return 0;
-    }
-
-    @Override
-    public int insert(User record) {
-        return 0;
-    }
-
-    @Override
-    public int insertSelective(User record) {
-        return 0;
-    }
 
     @Override
     public ResultVM updateByPrimaryKeySelective(String oldpwd, String newpwd) {
@@ -64,6 +50,14 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(User user) {
+        //转成MD5格式的密码
+        user.setPwd(MD5.getMD5(user.getPwd(),user.getUid()));
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
     @Override
     public int updateByPrimaryKey(User record) {
         return 0;

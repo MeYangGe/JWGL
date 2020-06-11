@@ -40,4 +40,9 @@ public interface CourseService {
  public PageInfo<Course> findAllByNameWithPage(int page, int pageSize, String name);
 
  public PageInfo<Course> selectCourseByTidAndCname(int pageNum, int pageSize, String cname);
+
+ /***
+  * @return 所有课程条数
+  */
+ int getTotalNum();
 }

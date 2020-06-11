@@ -36,7 +36,7 @@ public class TeacherServiceImpl implements TeacherService {
     public int addTeacher(Teacher teacher) {
         int i = teacherMapper.addTeacher(teacher);
         //添加到 user 表
-        //userMapper.addUser(new User(teacher.getTid(),teacher.getName(), MD5.getMD5("123456"),new Role(2)));
+        userMapper.addUser(new User(teacher.getTid(),teacher.getName(), MD5.getMD5("123456",teacher.getTid()),new Role(2)));
         return i;
     }
 
@@ -61,5 +61,10 @@ public class TeacherServiceImpl implements TeacherService {
     public PageInfo<Teacher> findAllByNameWithPage(int page, int pageSize, String name) {
         PageHelper.startPage(page, pageSize);
         return new PageInfo<>(teacherMapper.findAllByName(name));
+    }
+
+    @Override
+    public int getTotalNum() {
+        return teacherMapper.getTotalNum();
     }
 }

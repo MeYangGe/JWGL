@@ -105,4 +105,11 @@ public class TeacherController {
         return ResultVM.ok(pageInfo);
     }
 
+    //获得所有的条数
+    @GetMapping("/getTotalNum")
+    public Integer getTotalNum(){
+        int totalNum = teacherService.getTotalNum();
+        return totalNum;
+    }
+
 }

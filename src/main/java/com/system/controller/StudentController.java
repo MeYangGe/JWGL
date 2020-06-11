@@ -90,12 +90,12 @@ public class StudentController {
 
     //添加一条数据
     @PostMapping("/addStudent")
-    public ResultVM addStudent(Student student){
+    public String addStudent(Student student){
         int i = studentService.addStudent(student);
         if(i > 0){
-            return ResultVM.ok("添加成功!");
+            return "<script>alert('添加成功！');history.go(-2)</script>";
         }
-        return ResultVM.error("添加失败");
+        return "<script>alert('添加失败！');history.go(-1)</script>";
     }
 
     //删除一条数据
@@ -110,12 +110,18 @@ public class StudentController {
 
     //修改一条数据
     @PostMapping("/updateStudent")
-    public ResultVM updateStudent(Student student){
+    public String updateStudent(Student student){
         int i = studentService.updateStudent(student);
         if(i > 0){
-            return ResultVM.ok("修改成功!");
+            return "<script>alert('修改成功！');history.go(-2)</script>";
         }
-        return ResultVM.error("修改失败");
+        return "<script>alert('修改失败！');history.go(-2)</script>";
     }
 
+    //获得所有的条数
+    @GetMapping("/getTotalNum")
+    public Integer getTotalNum(){
+        int totalNum = studentService.getTotalNum();
+        return totalNum;
+    }
 }
