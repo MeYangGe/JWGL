@@ -24,10 +24,6 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.selectByPrimaryKey(sid);
     }
 
-    @Override
-    public PageInfo<Student> selectByCid(int pageNum, int pageSize, Integer cid) {
-        return new PageInfo<Student>(studentMapper.selectByCid(cid));
-    }
 
     @Override
     public int addStudent(Student student) {

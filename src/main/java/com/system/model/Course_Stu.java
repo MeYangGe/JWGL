@@ -10,14 +10,15 @@ public class Course_Stu implements Serializable {
     //主键
     private Integer csi;
 
+    //得分
+    private Double achievement;
+
     //Student 对象字段
     private Student student;
 
     //课程信息对象
     private Course course;
 
-    //得分
-    private Double achievement;
 
     //课程状态
     private Integer state ;
