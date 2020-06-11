@@ -19,9 +19,9 @@ public class LoginController {
     //登陆操作
     @GetMapping("/login")
     public ResultVM login(User user){
-        //管理员测试账号
+        /*//管理员测试账号
         user.setUid(10002);
-        user.setPwd("123456");
+        user.setPwd("123456");*/
 
 
         Subject currentUser = SecurityUtils.getSubject();
@@ -42,12 +42,12 @@ public class LoginController {
             }
         }
         if (currentUser.hasRole("admin")) {
-            return ResultVM.ok("身份验证成功拥有权限：admin");
+            return ResultVM.ok("admin");
         } else if (currentUser.hasRole("teacher")) {
-            return ResultVM.ok("身份验证成功拥有权限：teacher");
+            return ResultVM.ok("teacher");
         } else if (currentUser.hasRole("student")) {
-            return ResultVM.ok("身份验证成功拥有权限：student");
+            return ResultVM.ok("student");
         }
-        return ResultVM.ok("身份验证成功之没得权限");
+        return ResultVM.error("密码错误");
     }
 }
