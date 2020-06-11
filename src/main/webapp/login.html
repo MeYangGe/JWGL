@@ -2,11 +2,9 @@
 <html lang="en">
 
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta charset="UTF-8">
 		<title>后台登录</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
 
 		<!--图标库-->
 		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css'>
@@ -14,10 +12,36 @@
 		<!--响应式框架-->
 		<link rel='stylesheet' href='css/bootstrap.min1.css'>
 
+
+		<script src="js/jquery-3.2.1.min.js"></script>
 		<!--主要样式-->
 		<link rel="stylesheet" href="css/style.css">
+		<script type="text/javascript">
 
-
+				function lg() {
+					$.ajax({
+						url:"http://localhost:8080/JWGL_war/login",
+						data:$("#form").serializeArray(),
+						dataType:"json",
+						xhrFields:{withCredentials:true},
+						type:"get",
+						success:function(data){
+							if (data.code==500){
+								alert(data.msg)
+							}else if(data.code==0){
+								if(data.msg=='admin'){
+									window.location.href="admin/showCourse.html"
+								}else if(data.msg=='teacher'){
+									window.location.href="teacher/showCourse.html"
+								}else if(data.msg=='student'){
+									window.location.href="student/showCourse.html"
+								}
+							}
+						}
+					})
+				}
+			
+		</script>
 	</head>
 
 	<body>
@@ -38,14 +62,14 @@
 					<div class="card-body">
 						<h2 class="card-title">欢迎登录！</h2>
 						<p>使用账号登录</p>
-						<form action="login" method="get">
+						<form id="form" onsubmit="return false">
 							<div class="form-group">
-								<input class="form-control" type="text" name="uid" placeholder="账号" required="required" />
+								<input class="form-control" name="uid" type="text" placeholder="账号" required="required" />
 							</div>
 							<div class="form-group">
-								<input class="form-control" type="password" name="pwd" placeholder="密码" required="required" />
+								<input class="form-control" name="pwd" type="password" placeholder="密码" required="required" />
 							</div>
-							<button class="btn btn-lg">登录</button>
+							<button onclick="lg()" class="btn btn-lg">登录</button>
 						</form>
 					</div>
 					<button class="btn btn-back js-btn" data-target="welcome"><i class="fas fa-angle-left"></i></button>

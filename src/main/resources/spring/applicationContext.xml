@@ -128,15 +128,17 @@
     <bean id="shiroFilter"
           class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
-        <property name="loginUrl" value="/login.html" />
-        <property name="successUrl" value="/student/showCourse.html" />
-        <property name="unauthorizedUrl" value="/error404.html" />
         <property name="filters">
             <map>
                 <entry key="roles">
                     <bean class="com.system.util.MyRolesAuthorizationFilter" />
+
+                </entry>
+                <entry key="logout">
+                    <bean class="com.system.util.ShiroLogoutFilter" />
                 </entry>
             </map>
+
         </property>
 
         <property name="filterChainDefinitionMap" ref="filterChainDefinition"></property>

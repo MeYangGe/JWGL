@@ -1,0 +1,236 @@
+<!DOCTYPE html >
+<html>
+<head>
+	<title>课程信息显示</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- 引入bootstrap -->
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<!-- 引入JQuery  bootstrap.js-->
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/pagehelper.js"></script>
+</head>
+<body>
+	<!-- 顶栏 -->
+	<div class="container" id="top">
+	    <div class="row">
+	        <div class="col-md-12">
+	            <!--加入导航条标题-->
+	            <div class="navbar navbar-default" role="navigation">
+	                　<div class="navbar-header">
+	                　    <a href="##" class="navbar-brand">教务信息查询系统(学生)</a>
+	                　</div>
+	                <form action="##" class="navbar-form navbar-right" rol="search">
+	                    <div class="dropdown">
+	                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="margin-right: 20px; ">
+								<!-- 登录用户名 -->
+	                            <span class="glyphicon glyphicon-user"></span>
+	                            <span class="caret"></span>
+	                        </button>
+	                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+	                            <li role="presentation">
+	                                <a role="menuitem" tabindex="-1" href="#">
+	                                    <span class="glyphicon glyphicon-cog pull-right"></span>
+	                                    修改个人信息
+	                                </a>
+	                            </li>
+	                            <!-分割线--->
+	                            <li role="presentation" class="divider"></li>
+	                            <li role="presentation">
+	                                <a role="menuitem" tabindex="-1" href="/logout">
+	                                    <span class="glyphicon glyphicon-off pull-right"></span>
+	                                    注销
+	                                </a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	
+	                </form>
+	            </div>
+	
+	        </div>
+	    </div>
+	</div>
+	<!-- 中间主体 -->
+	<div class="container" id="content">
+		<div class="row">
+			<!-- MenuStart -->
+			<div class="col-md-2">
+				<ul class="nav nav-pills nav-stacked" id="nav">
+					<li><a href="showCourse.html">所有课程<span class="badge pull-right">26</span></a></li>
+					<li><a href="selectCourse.html">已选课程<span class="badge pull-right">5</span></a></li>
+					<li><a href="overCourse.html">已修课程<span class="badge pull-right">8</span></a></li>
+					<li><a href="passwordRest.html">修改密码
+							<sapn class="glyphicon glyphicon-pencil pull-right" /></a></li>
+					<li><a href="/logout">退出系统
+							<sapn class="glyphicon glyphicon-log-out pull-right" /></a></li>
+					<li class="disabled"><a href="##">Responsive</a></li>
+				</ul>
+			</div>
+			<!-- MenuEnd -->
+			<div class="col-md-10">
+				<div class="panel panel-default">
+				    <div class="panel-heading">
+						<div class="row">
+					    	<h1 class="col-md-5">课程列表</h1>
+							<form class="bs-example bs-example-form col-md-5" role="form" style="margin: 20px 0 10px 0;" action="/admin/selectCourse" id="form1" method="post">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="请输入课程名" id="findByName">
+									<span class="input-group-addon btn" onclick="findByName()" id="sub">搜索</span>
+								</div>
+							</form>
+
+						</div>
+				    </div>
+				    <table class="table table-bordered">
+					        <thead>
+					            <tr>
+									<th>课程号</th>
+									<th>课程名称</th>
+									<th>授课老师编号</th>
+									<th>上课时间</th>
+									<th>上课地点</th>
+									<th>周数</th>
+									<th>课程类型</th>
+									<th>学分</th>
+									<th>操作</th>
+					            </tr>
+					        </thead>
+					        <tbody>
+								<tr>
+									<td>XXX</td>
+									<td>XXX</td>
+									<td>XXX</td>
+									<td>XXX</td>
+									<td>XXX</td>
+									<td>XXX</td>
+									<td>XXX</td>
+									<td>XXX</td>
+									<td>
+										<button class="btn btn-default btn-xs btn-info" onClick="">选课</button>
+										<!--弹出框-->
+									</td>
+								</tr>
+					        </tbody>
+				    </table>
+				    <div class="panel-footer">
+							<nav style="text-align: center">
+								<ul class="pagination">
+									<li><a href="#">&laquo;上一页</a></li>
+									<!--<li class="active"><a href="">1</a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>-->
+									<li><a href="#">最后一页&raquo;</a></li>
+								</ul>
+							</nav>
+				    </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="container" id="footer">
+		<div class="row">
+			<div class="col-md-12"></div>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+		var name = "";	//动态查询的名字
+		//上一页
+		function prePage(){
+			var pageNum = $(".active").text();
+			if(pageNum > 1){
+				findCourseByName((pageNum-1),5,name);
+			}
+		};
+
+		//页数跳转
+		function changePage(pageNum){
+			findCourseByName(pageNum,5,name);
+		};
+
+		//尾页
+		function lastPage(pages){
+			findCourseByName(pages,5,name);
+		};
+		function f(cid) {
+			$.ajax({
+				url:"http://localhost:8080/JWGL_war/student/stuSelectedCourse/"+cid,
+				dataType:"json",
+				xhrFields:{withCredentials:true},
+				type:"get",
+				success:function(data){
+					if(data.code==401){
+						alert(data.msg)
+						window.location.href="../login.html"
+					}else if (data.code==500){
+						alert(data.msg)
+					}else if(data.code==0){
+						alert(data.msg)
+					}
+				}
+			})
+		}
+
+		function findCourseByName(page,pageSize,name){
+			$.ajax({
+				url:"http://localhost:8080/JWGL_war/student/courses",
+				data:{pageNum:page,pageSize:pageSize,key:name},
+				dataType:"json",
+				xhrFields:{withCredentials:true},
+				type:"get",
+				success:function(data){
+					if(data.code==401){
+						alert(data.msg)
+						window.location.href="../login.html"
+					}
+					//将总条数写入页面
+					$("tbody").text(data.result.total);
+					//将数据显示到页面
+					//清空信息
+					$("tbody").html("");
+					$.each(data.result.list,function(i,o){
+						$("tbody").append("<tr>"+
+								"<tr><td>"+o.cid+"</td><td>"+o.cname+"</td><td>"+o.teacher.tid+"</td><td>"+o.schoolTime+"</td><td>"+o.address+"</td><td>"+o.week+"</td><td>"+
+								o.type+"</td><td>"+o.score+"</td><td><button class='btn btn-default btn-xs btn-info' onClick='f("+o.cid+")'>选课</button></td>");
+					});
+					//追加角码
+					var pageNum = data.result.pageNum;	//当前页
+					var pages = data.result.pages;	//总页数
+					var prePage = data.result.prePage;	//前面有多少页
+					var nextPage = data.result.nextPage;	//后面有多少页
+					$(".pagination").html("");		//清空角码
+					$(".pagination").append("<li id='prePage'  onclick='prePage()'><a href='#'>&laquo;上一页</a></li>");
+					$(".pagination").append("<li id='endPage' onclick='lastPage("+pages+")'><a href='#'>最后一页&raquo;</a></li>");
+					if(pageNum > 1 && pageNum < pages){	//如果当前页不是第一页 也 不是最后一页，则显示左中右三页
+						$("#prePage").after("<li onclick='changePage("+(pageNum+1)+")'><a href='#'>"+(pageNum+1)+"</a></li>");
+						$("#prePage").after("<li class='active'><a href='#'>"+pageNum+"</a></li>");
+						$("#prePage").after("<li onclick='changePage("+(pageNum-1)+")' ><a href='#'>"+(pageNum-1)+"</a></li>");
+					}else if(pageNum==1){	//如果当前页是第一页，判断是否有后两页
+						for(var i = 3>pages?pages:3 ; i > 1; i--){
+							$("#prePage").after("<li onclick='changePage("+i+")'><a href='#'>"+i+"</a></li>");
+						}
+						$("#prePage").after("<li class='active'><a href='#'>"+pageNum+"</a></li>");
+					}else if(pageNum == pages){ //如果当前页是最后一页，判断是否有前两页
+						for(var i = prePage-2>=0?(pages-2):1; i < pages; i++){
+							$("#endPage").before("<li onclick='changePage("+i+")'><a href='#'>"+i+"</a></li>");
+						}
+						$("#endPage").before("<li class='active'><a href='#'>"+pageNum+"</a></li>");
+					}
+				}
+			})
+		};
+
+		//动态查询
+		function findByName(){
+			name = $("#findByName").val();
+			findCourseByName(1,5,name);
+		}
+		$(function(){
+			//获得所有的教师，并将其写入到页面
+			findCourseByName(1,5,name);
+		})
+	</script>
+</html>
