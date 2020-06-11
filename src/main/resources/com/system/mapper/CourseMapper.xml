@@ -67,12 +67,12 @@
 </update>
 
 <select id="findAllByName" resultMap="DynamicQueryFind">
-    select c.cid,c.cname,c.schooltime,c.address,c.week,c.type,c.score,t.tid,t.name,ce.collegeid,ce.cname
+    select c.cid,c.cname,c.schooltime,c.address,c.week,c.type,c.score,IFNULL(t.tid, -1) tid,IFNULL(t.name, "未知") name,ce.collegeid
     from course c left join teacher t
     on c.tid = t.tid left join college ce on c.collegeid = ce.collegeid
     <where>
     <if test="name != null and name != ''">
-        c.cname like '%${name}%'
+        name like '%${name}%'
     </if>
     </where>
 </select>

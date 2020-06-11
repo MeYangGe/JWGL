@@ -6,10 +6,7 @@ import com.system.service.CourseService;
 import com.system.util.ResultVM;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author JC
@@ -38,44 +35,35 @@ public class CourseController {
 
     //添加一个课程
     @PostMapping("/saveCourse")
-    public ResultVM saveCourse(Course course){
+    public String saveCourse(Course course){
         int i = courseService.addCourse(course);
         ResultVM resultVM = new ResultVM();
         if(i>0){
-            resultVM.setCode(200);
-            resultVM.setMsg("添加成功！");
-            return resultVM;
+            return "<script>alert('添加成功！');history.go(-2)</script>";
         }
         resultVM.setCode(233);
-        return resultVM;
+        return "<script>alert('添加失败！');history.go(-1)</script>";
     }
 
     //修改一个课程
     @PostMapping("/updateCourse")
-    public ResultVM updateCourse(Course course){
+    public String updateCourse(Course course){
         int i = courseService.updateCourse(course);
         ResultVM resultVM = new ResultVM();
         if(i>0){
-            resultVM.setCode(200);
-            resultVM.setMsg("修改成功！");
-            return resultVM;
+            return "<script>alert('修改成功！');history.go(-2)</script>";
         }
-        resultVM.setCode(233);
-        return resultVM;
+        return "<script>alert('修改失败！');history.go(-2)</script>";
     }
 
     //删除一个课程
-    @PostMapping("/deleteCourse")
-    public ResultVM deleteCourse(Integer cid){
+    @GetMapping("/deleteCourse/{cid}")
+    public ResultVM deleteCourse(@PathVariable("cid") Integer cid){
         int i = courseService.deleteCourse(cid);
-        ResultVM resultVM = new ResultVM();
         if(i>0){
-            resultVM.setCode(200);
-            resultVM.setMsg("删除成功！");
-            return resultVM;
+            return ResultVM.ok("删除成功！");
         }
-        resultVM.setCode(233);
-        return resultVM;
+        return ResultVM.error("删除失败！");
     }
 
 }
