@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     public User selectByPrimaryKey(Integer uid);
 
-    public int updateByPrimaryKey(User record);
-
     public User selectBySelective(User user);
 
     public User selectByUname(String uname);
@@ -24,6 +22,12 @@ public interface UserService {
      */
      ResultVM updateByPrimaryKeySelective(String oldpwd, String newpwd);
 
+    /***
+     *  修改管理员密码
+     * @param
+     * @return
+     */
+    int updateManagerPwd(String oldpwd, String newpwd);
 
     /***
      *  修改非管理员密码

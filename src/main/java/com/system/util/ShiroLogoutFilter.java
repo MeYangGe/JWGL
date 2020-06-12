@@ -19,7 +19,7 @@ public class ShiroLogoutFilter extends LogoutFilter {
         subject.logout();
         response.setContentType("application/json; charset=utf-8");//返回json
         ObjectMapper objectMapper = new ObjectMapper();
-        response.getWriter().write(objectMapper.writeValueAsString(ResultVM.error(401, "11111")));
+        response.getWriter().write(objectMapper.writeValueAsString(ResultVM.error(401, "退出成功!")));
         return false;
     }
 }
