@@ -78,4 +78,9 @@ public class CourseServiceImpl implements CourseService {
     public int getTotalNum() {
         return courseMapper.getTotalNum();
     }
+
+    @Override
+    public int selectCourseCountBySid(Integer sid) {
+        return courseMapper.selectCourseCountBySid(sid);
+    }
 }

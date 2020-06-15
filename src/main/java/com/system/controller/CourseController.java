@@ -72,5 +72,4 @@ public class CourseController {
         int totalNum = courseService.getTotalNum();
         return totalNum;
     }
-
 }
