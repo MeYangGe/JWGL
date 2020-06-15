@@ -79,7 +79,8 @@
 
     <!--模糊查询带分页的查询老师教授课程-->
     <select id="selectCourseByTidAndCname" resultMap="BaseResultMap">
-        select  *
+        select  cid as courseid ,cname as coursename,tid,
+        schooltime ,address ,week,type,score
         from course
         <where>
             <if test="tid!=null and tid!=''">

@@ -51,8 +51,16 @@ public class TeacherController {
 
     //给学生课程打分
     @PostMapping("/upadteAchievement")
-    public ResultVM upadteAchievement(Course_Stu course_stu){
-        int i = course_StuService.upadteAchievement(course_stu);
+    public ResultVM upadteAchievement(int cid,int sid,Double achievement){
+        Course_Stu cs = new Course_Stu();
+        Course course = new Course();
+        course.setCid(cid);
+        cs.setCourse(course);
+        Student student = new Student();
+        student.setSid(sid);
+        cs.setStudent(student);
+        cs.setAchievement(achievement);
+        int i = course_StuService.upadteAchievement(cs);
         if (i > 0) {
             return ResultVM.ok("打分成功");
         }

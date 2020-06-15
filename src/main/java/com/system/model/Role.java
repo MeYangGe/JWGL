@@ -1,5 +1,9 @@
 package com.system.model;
 
+
+
+
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -14,6 +18,20 @@ public class Role implements Serializable{
     private Integer rid;
     private String roleName;
     private String permissions;
+
+
+    /*public Role(Integer rid) {
+        this.rid = rid;
+    }
+
+    public Role(Integer rid, String roleName, String permissions) {
+        this.rid = rid;
+        this.roleName = roleName;
+        this.permissions = permissions;
+    }
+
+    public Role() {
+    }*/
 
     public Integer getRid() {
         return rid;

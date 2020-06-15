@@ -19,12 +19,8 @@ public class ShiroRealm extends AuthorizingRealm {
 	UserService userService;
 
 	public static void main(String[] args) {
-		String algorithmName = "MD5";
-		Object source = "123456";
-		Object salt = ByteSource.Util.bytes(String.valueOf(10003));
-		Integer hashIterations = 1024;
-		SimpleHash simpleHash = new SimpleHash(algorithmName, source, salt, hashIterations);
-		System.out.println(simpleHash);
+		String md5 = MD5.getMD5("123456", "10022");
+		System.out.println(md5);
 	}
 	/**
 	 * @Author : MeYanGe

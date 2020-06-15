@@ -1,6 +1,9 @@
 package com.system.model;
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.ConstructorArgs;
 
 import java.io.Serializable;
@@ -13,6 +16,16 @@ public class User implements Serializable{
     private String uname;
     private String pwd;
     private Role role;
+
+   /* public User() {
+    }
+
+    public User(Integer uid, String uname, String pwd, Role role) {
+        this.uid = uid;
+        this.uname = uname;
+        this.pwd = pwd;
+        this.role = role;
+    }*/
 
     public Integer getUid() {
         return uid;

@@ -52,15 +52,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(User user) {
-        //转成MD5格式的密码
-        user.setPwd(MD5.getMD5(user.getPwd(),user.getUid()));
-        return userMapper.updateByPrimaryKeySelective(user);
-    }
-
-    @Override
-    public int updateByPrimaryKey(User record) {
+    public int updateManagerPwd(String oldpwd, String newpwd) {
+        Subject subject = SecurityUtils.getSubject();
+        User user = selectByPrimaryKey(Integer.valueOf((Integer) subject.getPrincipal()));
+        String md5 = MD5.getMD5(oldpwd,subject.getPrincipal());
+        if(md5.equals(user.getPwd())){
+            user.setPwd(MD5.getMD5(newpwd,subject.getPrincipal()));
+            return userMapper.updateManagerPwd(user);
+        }
         return 0;
     }
 
+
+    @Override
+    public int updateByPrimaryKeySelective(User user) {
+        //通过名字查到 id
+        User user1 = userMapper.selectByUname(user.getUname());
+        //转成MD5格式的密码
+        user.setPwd(MD5.getMD5(user.getPwd(),user1.getUid()));
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
 }

@@ -48,12 +48,12 @@ where
 
 <!--修改非管理员密码-->
 <update id="updateByPrimaryKeySelective">
-    update user set pwd=#{user.pwd} where uname=#{user.uname} and rid!=1
+    update user set pwd=#{user.pwd} where uname=#{user.uname} and rid != 1
 </update>
 
-<!--修改密码，并校验就密码-->
-<update id="updateUser">
-    update user set pwd = #{user.pwd} where uname = #{user.uname} and pwd = #{user.pwd}
+<!--修改非管理员密码-->
+<update id="updateManagerPwd">
+    update user set pwd=#{user.pwd} where uname=#{user.uname}
 </update>
 
 <!--添加一条数据-->

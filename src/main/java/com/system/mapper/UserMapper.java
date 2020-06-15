@@ -18,8 +18,8 @@ public interface UserMapper {
     //修改非管理员密码
     int updateByPrimaryKeySelective(@Param("user") User user);
 
-    //修改密码，并校验旧密码
-    int updateUser(@Param("oldPwd") String oldPwd,@Param("user") User user);
+    //修改管理员密码   当时写方法的时候，没有考虑周到
+    int updateManagerPwd(@Param("user") User user);
 
     //添加一个用户
     int addUser(User user);
