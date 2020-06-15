@@ -68,6 +68,9 @@ public class UserServiceImpl implements UserService {
     public int updateByPrimaryKeySelective(User user) {
         //通过名字查到 id
         User user1 = userMapper.selectByUname(user.getUname());
+        if(user1==null){
+            return 0;
+        }
         //转成MD5格式的密码
         user.setPwd(MD5.getMD5(user.getPwd(),user1.getUid()));
         return userMapper.updateByPrimaryKeySelective(user);
