@@ -10,6 +10,8 @@ import com.system.model.Teacher;
 import com.system.model.User;
 import com.system.service.TeacherService;
 import com.system.util.MD5;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,5 +68,12 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int getTotalNum() {
         return teacherMapper.getTotalNum();
+    }
+
+    @Override
+    public Teacher getTeacher() {
+        Subject subject = SecurityUtils.getSubject();
+        Integer tid = (Integer) subject.getPrincipal();
+        return teacherMapper.getTeacher(tid);
     }
 }

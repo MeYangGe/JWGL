@@ -14,7 +14,7 @@ public interface Course_StuMapper {
     int upadte(@Param("course_stu") Course_Stu course_stu);
 
 
-    int upadteAchievement(@Param("course_stu") Course_Stu course_stu);
+    int upadteAchievement(@Param("cid") int cid,@Param("sid") int sid,@Param("achievement") Double achievement);
 
     List<Course_Stu> selectByscid(@Param("course_stu") Course_Stu course_stu);
 

@@ -25,6 +25,8 @@ public class TeacherController {
     private Course_StuService course_StuService;
     @Autowired
     private Course_StuExpandService course_StuExpandService;
+    @Autowired
+    private UserService userService;
 
 
     //获得所有的教师
@@ -52,15 +54,8 @@ public class TeacherController {
     //给学生课程打分
     @PostMapping("/upadteAchievement")
     public ResultVM upadteAchievement(int cid,int sid,Double achievement){
-        Course_Stu cs = new Course_Stu();
-        Course course = new Course();
-        course.setCid(cid);
-        cs.setCourse(course);
-        Student student = new Student();
-        student.setSid(sid);
-        cs.setStudent(student);
-        cs.setAchievement(achievement);
-        int i = course_StuService.upadteAchievement(cs);
+
+        int i = course_StuService.upadteAchievement(cid, sid, achievement);
         if (i > 0) {
             return ResultVM.ok("打分成功");
         }
@@ -120,4 +115,15 @@ public class TeacherController {
         return totalNum;
     }
 
+    //重置密码
+    @GetMapping("Resetpassword")
+    public ResultVM resetPassword(String oldpwd,String newpwd){
+        return userService.updateByPrimaryKeySelective(oldpwd,newpwd);
+    }
+
+    //获得当前教师
+    @GetMapping("/getTeacher")
+    public ResultVM getTeacher(){
+        return ResultVM.ok(teacherService.getTeacher());
+    }
 }

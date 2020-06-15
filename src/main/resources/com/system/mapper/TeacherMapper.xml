@@ -54,4 +54,10 @@
 <select id="getTotalNum"  resultType="int">
     select count(1) from teacher
 </select>
+
+<!--获得当前老师-->
+<select id="getTeacher"  resultMap="BaseResultMap">
+ select t.tid,t.name,t.sex,t.birthady,t.edu,t.title,t.hiredate,c.collegeid,c.cname
+    from teacher t left join college c on t.collegeid = c.collegeid where tid= #{tid}
+</select>
 </mapper>

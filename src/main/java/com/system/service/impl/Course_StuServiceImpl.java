@@ -85,7 +85,7 @@ public class Course_StuServiceImpl implements Course_StuService {
     }
 
     @Override
-    public int upadteAchievement(Course_Stu course_stu) {
-        return selectedcourseMapper.upadteAchievement(course_stu);
+    public int upadteAchievement(int cid,int sid,Double achievement) {
+        return selectedcourseMapper.upadteAchievement(cid,sid,achievement);
     }
 }

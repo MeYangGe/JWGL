@@ -16,7 +16,7 @@ import java.util.List;
 public interface Course_StuService {
     int insert(Course_Stu course_stu);
 
-    int upadteAchievement(Course_Stu course_stu);
+    int upadteAchievement(int cid,int sid,Double achievement);
 
     ResultVM upadte(Integer cid);
 

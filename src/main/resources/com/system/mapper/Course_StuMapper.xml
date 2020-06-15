@@ -50,8 +50,8 @@ SELECT * from course_stu cs LEFT JOIN course c on cs.cid=c.cid LEFT JOIN student
 
     <!--学生课程打分-->
     <update id="upadteAchievement">
-        update  course_stu set achievement=#{course_stu.achievement,jdbcType=DOUBLE}
-        where cid=#{course_stu.course.cid,jdbcType=INTEGER} and sid=#{course_stu.student.sid,jdbcType=INTEGER}
+        update  course_stu set achievement=#{achievement,jdbcType=DOUBLE}
+        where cid=#{cid,jdbcType=INTEGER} and sid=#{sid,jdbcType=INTEGER}
     </update>
 
 

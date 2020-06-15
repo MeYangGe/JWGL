@@ -49,4 +49,9 @@ public interface TeacherService {
      * @return 所有课程条数
      */
     int getTotalNum();
+
+    /***
+     * @return 获得当前教师
+     */
+    Teacher getTeacher();
 }
