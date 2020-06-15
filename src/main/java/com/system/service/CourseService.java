@@ -3,6 +3,7 @@ package com.system.service;
 import com.github.pagehelper.PageInfo;
 import com.system.model.Course;
 import com.system.util.ResultVM;
+import org.apache.ibatis.annotations.Param;
 
 public interface CourseService {
 
@@ -45,4 +46,8 @@ public interface CourseService {
   * @return 所有课程条数
   */
  int getTotalNum();
+/**
+ * @return 所有学生所选课程条数
+ * */
+ int selectCourseCountBySid(@Param("sid") Integer sid);
 }

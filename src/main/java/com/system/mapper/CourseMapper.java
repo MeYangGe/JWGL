@@ -20,6 +20,8 @@ public interface CourseMapper {
 
     int getTotalNum();
 
+    int selectCourseCountBySid(@Param("sid") Integer sid);
+
     List<Course> findAllByName(@Param("name") String name);
 
     List<Course> selectCourseByTidAndCname(@Param("tid") Integer tid,@Param("cname") String cname);

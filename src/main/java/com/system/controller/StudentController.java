@@ -11,6 +11,9 @@ import com.system.util.ResultVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author  JGW
  * @date  2020-06-05 08点08分
@@ -123,5 +126,14 @@ public class StudentController {
     public Integer getTotalNum(){
         int totalNum = studentService.getTotalNum();
         return totalNum;
+    }
+    //获得所有的条数
+    @GetMapping("/getCourseTotalNum")
+    public Map<String,Object> getAllTotalNum(){
+        Map<String,Object> map = new HashMap<>();
+        map.put("AllCourse",courseService.getTotalNum());
+        map.put("CourseBySid",course_stuService.selectCourseCountBySidAndStatus());
+        map.put("selectedCourse",course_stuService.selectedCourseCountBySidAndStatus());
+        return map;
     }
 }

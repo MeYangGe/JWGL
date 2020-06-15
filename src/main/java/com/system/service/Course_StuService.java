@@ -18,9 +18,13 @@ public interface Course_StuService {
 
     int upadteAchievement(int cid,int sid,Double achievement);
 
+    Integer selectCourseCountBySidAndStatus();
+
     ResultVM upadte(Integer cid);
 
     ResultVM selectByscid(Integer cid);
 
     ResultVM selectCourseBySidAndStatus(int pageNum, int pageSize);
+
+    Integer selectedCourseCountBySidAndStatus();
 }

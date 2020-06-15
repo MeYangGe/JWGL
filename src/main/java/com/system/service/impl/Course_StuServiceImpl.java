@@ -71,6 +71,9 @@ public class Course_StuServiceImpl implements Course_StuService {
             return ResultVM.error("选课失败");
         }
     }
+    /**
+     * 查询学生已修课程
+     * */
    @Override
    public ResultVM selectCourseBySidAndStatus(int pageNum, int pageSize){
        PageHelper.startPage(pageNum,pageSize);
@@ -82,6 +85,33 @@ public class Course_StuServiceImpl implements Course_StuService {
        course_stu.setStudent(student);
        PageInfo pageInfo = new PageInfo(selectedcourseMapper.selectCourseBySidAndStatus(course_stu));
        return ResultVM.ok(pageInfo);
+    }
+    /**
+     * 查询学生已修课程数量
+     * */
+    @Override
+    public Integer selectCourseCountBySidAndStatus(){
+        Subject subject = SecurityUtils.getSubject();
+        Integer sid = (Integer) subject.getPrincipal();
+        Course_Stu course_stu = new Course_Stu();
+        course_stu.setState(1);
+        Student student = new Student();
+        student.setSid(sid);
+        course_stu.setStudent(student);
+        return selectedcourseMapper.selectCourseCountBySidAndStatus(course_stu);
+    }
+    /**
+     * 查询学生已选课程数量
+     * */
+    @Override
+    public Integer selectedCourseCountBySidAndStatus(){
+        Subject subject = SecurityUtils.getSubject();
+        Integer sid = (Integer) subject.getPrincipal();
+        Course_Stu course_stu = new Course_Stu();
+        Student student = new Student();
+        student.setSid(sid);
+        course_stu.setStudent(student);
+        return selectedcourseMapper.selectCourseCountBySidAndStatus(course_stu);
     }
 
     @Override
