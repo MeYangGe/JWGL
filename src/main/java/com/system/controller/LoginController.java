@@ -32,7 +32,7 @@ public class LoginController {
                 currentUser.login(token);
             }
             catch (AuthenticationException ae) {
-                return ResultVM.error(ae.getMessage());
+                return ResultVM.error("账号或密码错误");
             }
         }
         if (currentUser.hasRole("admin")) {
